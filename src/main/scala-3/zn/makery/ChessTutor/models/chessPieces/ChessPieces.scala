@@ -1,4 +1,4 @@
-package models.chessPieces
+package ChessTutor.models.chessPieces
 
 import scala.collection.mutable.Stack
 

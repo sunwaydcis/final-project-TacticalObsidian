@@ -6,8 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zn.makery.ChessTutor.view.EntryViewContoller">
    <children>
       <Text layoutX="199.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ChessTutor" textAlignment="CENTER" wrappingWidth="206.22735595703125" AnchorPane.bottomAnchor="277.12675781250005" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="197.79999999999995" AnchorPane.topAnchor="74.0732421875">
          <font>
@@ -16,8 +15,8 @@
       </Text>
       <VBox layoutX="239.0" layoutY="178.0" prefHeight="63.0" prefWidth="126.0" spacing="10.0" AnchorPane.leftAnchor="239.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Play" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="124.0" text="View Game History" />
+            <Button mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="26.0" prefWidth="130.0" text="Play" />
+            <Button mnemonicParsing="false" onAction="#handleGameHistoryBtn" prefHeight="26.0" prefWidth="124.0" text="View Game History" />
          </children>
       </VBox>
    </children>

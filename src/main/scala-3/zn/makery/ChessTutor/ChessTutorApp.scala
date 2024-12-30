@@ -1,13 +1,14 @@
 package zn.makery.ChessTutor
 
 import javafx.fxml.FXMLLoader
+import javafx.scene as jfxs
+import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
-import scalafx.scene.Scene
-import scalafx.Includes.*
-import javafx.scene as jfxs
 import scalafx.collections.ObservableBuffer
+import scalafx.scene.Scene
 import scalafx.stage.{Modality, Stage}
+import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
 
 object ChessTutorApp extends JFXApp3:
 
@@ -26,8 +27,8 @@ object ChessTutorApp extends JFXApp3:
         root = rootPane.get
 
     //For testing purposes show the game
+    showEntryPoint()
 //    showGameHistory()
-//    showEntryPoint()
 //    showGameSetting()
 //    showGame()
 
@@ -37,6 +38,7 @@ object ChessTutorApp extends JFXApp3:
   def showEntryPoint(): Unit =
     val resource = getClass.getResource("view/EntryView.fxml")
     val loader = new FXMLLoader(resource)
+    val controller = loader.getController[zn.makery.ChessTutor.view.EntryViewContoller]
     loader.load()
 
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
