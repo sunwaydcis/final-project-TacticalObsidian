@@ -3,13 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane layoutX="130.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" styleClass="main_bkg" stylesheets="@ChessTutor.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="130.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" styleClass="main_bkg" stylesheets="@A_ChessTutor.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" styleClass="card_bkg" BorderPane.alignment="CENTER">
               <buttons>
@@ -20,6 +22,40 @@
                </padding>
             </ButtonBar>
          </top>
+         <center>
+            <AnchorPane prefHeight="360.0" prefWidth="390.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </BorderPane.margin>
+               <children>
+                  <VBox alignment="CENTER" layoutX="172.0" layoutY="26.0" prefHeight="200.0" prefWidth="196.0" spacing="20.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+                     <children>
+                        <ComboBox editable="true" prefWidth="150.0" promptText="ELO" visibleRowCount="5" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="White" />
+                              <Button mnemonicParsing="false" text="Random" />
+                              <Button mnemonicParsing="false" text="Black" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Unlimited" />
+                              <Button mnemonicParsing="false" text="10 | 10" />
+                              <Button mnemonicParsing="false" text="10 | 5" />
+                              <Button mnemonicParsing="false" text="5 | 10" />
+                              <Button mnemonicParsing="false" text="5 | 5" />
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Play" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

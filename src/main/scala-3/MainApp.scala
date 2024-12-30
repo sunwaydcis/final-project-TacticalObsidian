@@ -26,11 +26,42 @@ object ChessTutorApp extends JFXApp3:
         root = rootPane.get
 
     //For testing purposes show the game
-    showGame()
+    showGameHistory()
+//    showEntryPoint()
+//    showGameSetting()
+//    showGame()
 
   end start
 
   //Actions (Methods) for ChessTutorApp
+  def showEntryPoint(): Unit =
+    val resource = getClass.getResource("view/EntryView.fxml")
+    val loader = new FXMLLoader(resource)
+    loader.load()
+
+    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
+    this.rootPane.get.center = rootPane
+  end showEntryPoint
+
+  def showGameSetting(): Unit =
+    val resource = getClass.getResource("view/BotSelectView.fxml")
+    val loader = new FXMLLoader(resource)
+    loader.load()
+
+    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
+    this.rootPane.get.center = rootPane
+  end showGameSetting
+
+  def showGameHistory(): Unit =
+    val resource = getClass.getResource("view/GameHistory.fxml")
+
+    val loader = new FXMLLoader(resource)
+    loader.load()
+
+    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
+    this.rootPane.get.center = rootPane
+  end showGameHistory
+
   def showGame(): Unit =
     val resource = getClass.getResource("view/GameView.fxml")
     val loader = new FXMLLoader(resource)
