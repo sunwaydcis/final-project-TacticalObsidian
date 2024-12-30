@@ -16,6 +16,7 @@ object ChessTutorApp extends JFXApp3:
   var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 
   override def start(): Unit =
+    //Load root view
     val rootResource = getClass.getResource("view/RootLayout.fxml")
     val loader = new FXMLLoader(rootResource)
     loader.load()
@@ -26,11 +27,8 @@ object ChessTutorApp extends JFXApp3:
       scene = new Scene():
         root = rootPane.get
 
-    //For testing purposes show the game
+    //Load app entry point.
     showEntryPoint()
-//    showGameHistory()
-//    showGameSetting()
-//    showGame()
 
   end start
 
@@ -45,19 +43,20 @@ object ChessTutorApp extends JFXApp3:
     this.rootPane.get.center = rootPane
   end showEntryPoint
 
-  def showGameSetting(): Unit =
-    val resource = getClass.getResource("view/BotSelectView.fxml")
+  def showGameSelect(): Unit =
+    val resource = getClass.getResource("view/GameSelect.fxml")
     val loader = new FXMLLoader(resource)
+    val controller = loader.getController[zn.makery.ChessTutor.view.GameSelectController]
     loader.load()
 
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
     this.rootPane.get.center = rootPane
-  end showGameSetting
+  end showGameSelect
 
   def showGameHistory(): Unit =
     val resource = getClass.getResource("view/GameHistory.fxml")
-
     val loader = new FXMLLoader(resource)
+    val controller = loader.getController[zn.makery.ChessTutor.view.GameHistoryController]
     loader.load()
 
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
