@@ -26,7 +26,7 @@ object ChessTutorApp extends JFXApp3:
         root = rootPane.get
 
     //For testing purposes show the game
-    showGameHistory()
+//    showGameHistory()
 //    showEntryPoint()
 //    showGameSetting()
 //    showGame()
