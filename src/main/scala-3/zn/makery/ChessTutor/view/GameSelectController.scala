@@ -74,7 +74,6 @@ class GameSelectController:
 
   //DO PLAY
   @FXML private def doPlay_Test(action: ActionEvent): Unit =
-    val game = new Game(playerRole.value, challenger.value, player1TimeCap.value, player2TimeCap.value)
     val onClick = ChessTutorApp.showGame()
   end doPlay_Test
 

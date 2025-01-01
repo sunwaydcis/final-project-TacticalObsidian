@@ -1,5 +1,6 @@
 package zn.makery.ChessTutor
 
+import ChessTutor.models.Game
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import scalafx.Includes.*
@@ -10,12 +11,39 @@ import scalafx.scene.Scene
 import scalafx.stage.{Modality, Stage}
 import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
 
-object ChessTutorApp extends JFXApp3:
+import java.time.LocalDate
 
+object ChessTutorApp extends JFXApp3:
+  val gameHistoryData = new ObservableBuffer[Game]()
   //Window root pane
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 
   override def start(): Unit =
+    //Test values
+    gameHistoryData += new Game("White", 250, 300){
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("White", 270, 320){
+      datePlayed.value = (LocalDate.of(2010, 8, 21))
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("Black", 220, 270){
+      datePlayed.value = (LocalDate.of(2080, 7, 12))
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("White", 240, 290){
+      datePlayed.value = (LocalDate.of(2004, 2, 5))
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("Black", 250, 300){
+      datePlayed.value = (LocalDate.of(1920, 1, 5))
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("Black", 300, 300){
+      datePlayed.value = (LocalDate.of(1900, 12, 3))
+      outcome.value = "Checkmate"
+    }
+
     //Load root view
     val rootResource = getClass.getResource("view/RootLayout.fxml")
     val loader = new FXMLLoader(rootResource)
@@ -56,8 +84,9 @@ object ChessTutorApp extends JFXApp3:
   def showGameHistory(): Unit =
     val resource = getClass.getResource("view/GameHistory.fxml")
     val loader = new FXMLLoader(resource)
-    val controller = loader.getController[zn.makery.ChessTutor.view.GameHistoryController]
     loader.load()
+    val controller = loader.getController[zn.makery.ChessTutor.view.GameHistoryController]
+    controller.initialize()
 
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
     this.rootPane.get.center = rootPane
