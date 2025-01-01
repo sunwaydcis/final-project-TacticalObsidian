@@ -1,22 +1,46 @@
 package zn.makery.ChessTutor.view
 
-import javafx.fxml.FXML
 import javafx.event.ActionEvent
-import scalafx.scene.control.{Label, TableView}
+import javafx.fxml.FXML
+import javafx.scene.control.{Label, TableColumn, TableView}
+import scalafx.Includes.*
+import scalafx.scene.control.Alert
+import scalafx.scene.control.Alert.AlertType
 import zn.makery.ChessTutor.ChessTutorApp
 
 class GameViewController:
-  @FXML private var moveHistoryTable: TableView[Any] = _
-  @FXML private var playerTwoLabel: Label = _
-  @FXML private var playerTwoElo: Label = _
-  @FXML private var playerOneLabel: Label = _
-  @FXML private var playerOneElo: Label = _
+  @FXML private var moveHistoryTable: TableView[Any] = null
+  @FXML private var playerTwoLabel: Label = null
+  @FXML private var playerTwoElo: Label = null
+  @FXML private var playerOneLabel: Label = null
+  @FXML private var playerOneElo: Label = null
 
-  @FXML def doViewNext(action: ActionEvent): Unit =
+  def doViewNext(action: ActionEvent): Unit =
     println("View Next clicked!")
+    if moveHistoryTable.getItems.isEmpty then println("There are no moves!")
 
-  @FXML def doViewPrevious(action: ActionEvent): Unit =
+    else
+      val currentIndex = moveHistoryTable.selectionModel().getSelectedIndex
+      if currentIndex != -1 then
+        println("Already at start of moves table!")
+      else
+        moveHistoryTable.getSelectionModel.select(currentIndex + 1)
+        println("Load Next")
+
+  def doViewPrevious(action: ActionEvent): Unit =
     println("View Prev clicked!")
+    if moveHistoryTable.getItems.isEmpty then
+      println("There are no moves!")
+
+    else
+      val currentIndex = moveHistoryTable.selectionModel().getSelectedIndex
+      if currentIndex <= 0 then
+        println("Already at start of moves table!")
+      else
+        moveHistoryTable.getSelectionModel.select(currentIndex - 1)
+        println("Load Previous")
+
+
 
   def doGamePause(action: ActionEvent): Unit =
     println("Pause clicked!")
@@ -36,4 +60,6 @@ class GameViewController:
   private def exitGame(): Unit =
     println("Game Exited Successfully!!")
     val onClick = ChessTutorApp.showGameSelect()
+
+
 
