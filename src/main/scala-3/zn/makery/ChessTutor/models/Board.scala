@@ -1,5 +1,5 @@
 package ChessTutor.models
 
-class Board {
+class Board() {
 
 }
