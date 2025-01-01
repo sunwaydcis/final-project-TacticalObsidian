@@ -13,7 +13,7 @@ import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
 object ChessTutorApp extends JFXApp3:
 
   //Window root pane
-  var rootPane: Option[scalafx.scene.layout.BorderPane] = None
+  private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 
   override def start(): Unit =
     //Load root view
@@ -66,6 +66,7 @@ object ChessTutorApp extends JFXApp3:
   def showGame(): Unit =
     val resource = getClass.getResource("view/GameView.fxml")
     val loader = new FXMLLoader(resource)
+    val controller = loader.getController[zn.makery.ChessTutor.view.GameViewController]
     loader.load()
 
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]

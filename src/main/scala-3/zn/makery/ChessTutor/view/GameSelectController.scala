@@ -1,3 +1,5 @@
+
+
 package zn.makery.ChessTutor.view
 
 import ChessTutor.models.Game
@@ -16,7 +18,7 @@ enum Burst:
 enum Mode:
   case VsPlayer, VsBotEqual, VsBotEasy
 
-class GameSelectController():
+class GameSelectController:
   /** CODE RESPONSIBILITY - Control the view logic
    * The outcome of certain views, can lead to the creation of a game instance object.
    */
@@ -50,9 +52,9 @@ class GameSelectController():
   private var challenger: StringProperty = new StringProperty(this, "versus", Mode.VsBotEasy.toString)
   private var playerRole : StringProperty = new StringProperty(this, "playerRole", Role.RANDOM.toString)
   private var timeMode: StringProperty = new StringProperty(this, "timeMode", Burst.UNLIMITED.toString)
-  
-  var game = new Game() 
-  
+  private var player1TimeCap: DoubleProperty = new DoubleProperty()
+  private var player2TimeCap: DoubleProperty = new DoubleProperty()
+
   //DO MODE SELECT
   private def challenger_=(button: Button): Unit =
     challenger = button.text
@@ -62,21 +64,22 @@ class GameSelectController():
   private def playRole_=(button: Button): Unit =
     playerRole = button.text
     println(playerRole.value)
-  
+
   //DO TIME SELECT
   private def timeMode_=(button: Button): Unit =
     timeMode = button.text
     println(timeMode.value)
-  //Code is repititive, but it's more readable if each parameter was controlled. 
+  //Code is repetitive, but it's more readable if each parameter was controlled. 
 
 
   //DO PLAY
-  private def doPlay_Test(action: ActionEvent): Unit =
+  @FXML private def doPlay_Test(action: ActionEvent): Unit =
+    val game = new Game(playerRole.value, challenger.value, player1TimeCap.value, player2TimeCap.value)
     val onClick = ChessTutorApp.showGame()
   end doPlay_Test
 
   // DO BACK
-  private def doBackTrack(action: ActionEvent): Unit =
+  @FXML private def doBackTrack(action: ActionEvent): Unit =
     val onClick = ChessTutorApp.showEntryPoint()
   end doBackTrack
 
@@ -97,3 +100,7 @@ class GameSelectController():
     selectedButton.getStyleClass.add("selected")
 
   def doButtonRestyle(buttonGroup: Option[Button], selectedButton: Button): Unit = ???
+
+
+
+  

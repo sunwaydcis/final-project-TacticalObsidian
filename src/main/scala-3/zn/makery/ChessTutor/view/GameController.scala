@@ -1,3 +1,4 @@
 package ChessTutor.view
 
-class GameControlle
+class GameController
+
