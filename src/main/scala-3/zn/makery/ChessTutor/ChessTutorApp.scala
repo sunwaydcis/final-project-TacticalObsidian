@@ -1,6 +1,6 @@
 package zn.makery.ChessTutor
 
-import ChessTutor.models.Game
+import ChessTutor.models.{Game}
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import scalafx.Includes.*
@@ -10,11 +10,15 @@ import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import scalafx.stage.{Modality, Stage}
 import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
+import zn.makery.ChessTutor.models.newGame
 
 import java.time.LocalDate
 
 object ChessTutorApp extends JFXApp3:
   val gameHistoryData = new ObservableBuffer[Game]()
+  
+  val game = new ObservableBuffer[newGame]()
+  
   //Window root pane
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 
@@ -75,7 +79,7 @@ object ChessTutorApp extends JFXApp3:
   def showGameSelect(): Unit =
     val resource = getClass.getResource("view/GameSelect.fxml")
     val loader = new FXMLLoader(resource)
-    val controller = loader.getController[zn.makery.ChessTutor.view.GameSelectController]
+    val controller = loader.getController[zn.makery.ChessTutor.view.GameOptions]
     loader.load()
 
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
@@ -106,5 +110,9 @@ object ChessTutorApp extends JFXApp3:
 
   def showAlert(): Unit = ???
   end showAlert
+  
+  def newGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
+    game += new newGame(role, TC1, TC2, AIELO)
+    println("New game created: " + game.foreach(_.toString))
 
 end ChessTutorApp
