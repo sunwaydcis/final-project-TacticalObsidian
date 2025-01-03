@@ -29,6 +29,17 @@ class GameHistoryController:
   @FXML private var player1MaterialLost: Label = null
   @FXML private var player1OverallMaterial: Label = null
 
+  //Player 2 labels - Information
+  @FXML private var player2Color: Label = null
+  @FXML private var player2Elo: Label = null
+  //P1 Moves/Times
+  @FXML private var player2TotalMoves: Label = null
+  @FXML private var player2TotalTime: Label = null
+  //P1 Material
+  @FXML private var player2MaterialGained: Label = null
+  @FXML private var player2MaterialLost: Label = null
+  @FXML private var player2OverallMaterial: Label = null
+
 
   def initialize() =
     gameHistoryTable.items = ChessTutorApp.gameHistoryData
@@ -41,3 +52,5 @@ class GameHistoryController:
   def doBackTrack(action: ActionEvent): Unit =
     val onClick = ChessTutorApp.showEntryPoint()
   end doBackTrack
+  
+  def showGameOverview()
