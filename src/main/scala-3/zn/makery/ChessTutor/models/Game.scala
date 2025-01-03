@@ -6,8 +6,8 @@ import scalafx.beans.property.{DoubleProperty, ObjectProperty, StringProperty}
 import java.time.LocalDate
 
 class Game ( //Constructor parameters
-             val playerRole: String, 
-             val playerELO: Int, 
+             val playerRole: String,
+             val playerELO: Int,
              val aiELO: Int):
 
   //Defined during / after game creation

@@ -26,6 +26,7 @@ object ChessTutorApp extends JFXApp3:
     gameHistoryData += new Game("White", 270, 320){
       datePlayed.value = (LocalDate.of(2010, 8, 21))
       outcome.value = "Checkmate"
+      totalTime.value = 560.00
     }
     gameHistoryData += new Game("Black", 220, 270){
       datePlayed.value = (LocalDate.of(2080, 7, 12))

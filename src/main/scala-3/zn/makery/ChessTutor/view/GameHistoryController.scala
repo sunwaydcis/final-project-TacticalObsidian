@@ -18,6 +18,17 @@ class GameHistoryController:
   @FXML private var totalTimeColumn: TableColumn[Game, Double] = null
   @FXML private var outcomeColumn: TableColumn[Game, String] = null
 
+  //Player 1 labels - Information
+  @FXML private var player1Color: Label = null
+  @FXML private var player1Elo: Label = null
+  //P1 Moves/Times
+  @FXML private var player1TotalMoves: Label = null
+  @FXML private var player1TotalTime: Label = null
+  //P1 Material
+  @FXML private var player1MaterialGained: Label = null
+  @FXML private var player1MaterialLost: Label = null
+  @FXML private var player1OverallMaterial: Label = null
+
 
   def initialize() =
     gameHistoryTable.items = ChessTutorApp.gameHistoryData

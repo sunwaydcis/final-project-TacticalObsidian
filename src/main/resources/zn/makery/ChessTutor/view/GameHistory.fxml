@@ -70,20 +70,20 @@
                               <Label alignment="CENTER" prefHeight="18.0" prefWidth="130.0" text="Opponent" GridPane.columnIndex="2" />
                               <Label alignment="CENTER" prefHeight="18.0" prefWidth="140.0" text="Total Time" GridPane.rowIndex="4" />
                               <Label alignment="CENTER" prefHeight="18.0" prefWidth="142.0" text="Overall Material" GridPane.rowIndex="7" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                              <Label fx:id="player1Color" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="player1Elo" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="player1TotalMoves" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="player1TotalTime" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="player1MaterialGained" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="player1MaterialLost" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="player1OverallMaterial" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label fx:id="player2Color" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label fx:id="player2Elo" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="player2TotalMoves" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label fx:id="player2TotalTime" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label fx:id="player2MaterialGained" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <Label fx:id="player2MaterialLost" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <Label fx:id="player2OverallMaterial" alignment="CENTER" prefHeight="18.0" prefWidth="128.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                            </children>
                         </GridPane>
                         <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="375.0" spacing="10.0">
