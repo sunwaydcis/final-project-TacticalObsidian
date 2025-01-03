@@ -1,6 +1,6 @@
 package zn.makery.ChessTutor
 
-import ChessTutor.models.{Game}
+import ChessTutor.models.{Board, Game}
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import scalafx.Includes.*
@@ -112,7 +112,17 @@ object ChessTutorApp extends JFXApp3:
   end showAlert
   
   def newGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
-    game += new newGame(role, TC1, TC2, AIELO)
+    val board = generateBoard()
+    val gameInstance = new newGame(role, TC1, TC2, AIELO)
+    gameInstance.board = Some(board)
+    
+    game += gameInstance
     println("New game created: " + game.foreach(_.toString))
+    
+  private def generateBoard(): Board =
+    val gameBoard = new Board()
+    gameBoard.init()
+    gameBoard
+    
 
 end ChessTutorApp

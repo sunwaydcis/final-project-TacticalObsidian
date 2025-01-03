@@ -16,10 +16,12 @@ class newGame(player1Color: String, player1TimeCap: Option[Double], player2TimeC
   var _currentPlayer: String = "White" //Default
   var moveHistory: List[Board] = List.empty
   var captured: List[A_ChessPieces] = List.empty
-  
+  var board: Option[Board] = None
+  val movesList : List[Moves] = List.empty
+
   def nextPlayer(nextPlayer: String): Unit =
     currentPlayer_=(nextPlayer)
-  
-  //Setter current player 
+
+  //Setter current player
   private def currentPlayer_=(nextPlayer: String): Unit =
     _currentPlayer = nextPlayer
