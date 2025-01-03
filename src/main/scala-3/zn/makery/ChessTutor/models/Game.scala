@@ -6,11 +6,14 @@ import scalafx.beans.property.{DoubleProperty, ObjectProperty, StringProperty}
 import java.time.LocalDate
 
 class Game ( //Constructor parameters
-             val playerRole: String,
-             val playerELO: Int,
-             val aiELO: Int):
+             val playerRoleString: String,
+             val playerELOString: Int,
+             val aiELOString: Int):
 
   //Defined during / after game creation
+  var playerRole = new StringProperty(playerRoleString)
+  var playerELO = new StringProperty(playerELOString.toString)
+  var aiELO = new StringProperty(aiELOString.toString)
   var datePlayed = ObjectProperty[LocalDate](LocalDate.of(1999, 2, 21))
   var moveHistory: List[Board] = List.empty
   var currentPlayer: String = "White" //Default
