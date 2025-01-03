@@ -11,6 +11,7 @@ import scalafx.scene.Scene
 import scalafx.stage.{Modality, Stage}
 import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
 import zn.makery.ChessTutor.models.newGame
+import zn.makery.ChessTutor.view.ChessBoardView
 
 import java.time.LocalDate
 
@@ -28,24 +29,24 @@ object ChessTutorApp extends JFXApp3:
       outcome.value = "Checkmate"
     }
     gameHistoryData += new Game("White", 270, 320){
-      datePlayed.value = (LocalDate.of(2010, 8, 21))
+      datePlayed.value = LocalDate.of(2010, 8, 21)
       outcome.value = "Checkmate"
       totalTime.value = 560.00
     }
     gameHistoryData += new Game("Black", 220, 270){
-      datePlayed.value = (LocalDate.of(2080, 7, 12))
+      datePlayed.value = LocalDate.of(2080, 7, 12)
       outcome.value = "Checkmate"
     }
     gameHistoryData += new Game("White", 240, 290){
-      datePlayed.value = (LocalDate.of(2004, 2, 5))
+      datePlayed.value = LocalDate.of(2004, 2, 5)
       outcome.value = "Checkmate"
     }
     gameHistoryData += new Game("Black", 250, 300){
-      datePlayed.value = (LocalDate.of(1920, 1, 5))
+      datePlayed.value = LocalDate.of(1920, 1, 5)
       outcome.value = "Checkmate"
     }
     gameHistoryData += new Game("Black", 300, 300){
-      datePlayed.value = (LocalDate.of(1900, 12, 3))
+      datePlayed.value = LocalDate.of(1900, 12, 3)
       outcome.value = "Checkmate"
     }
 
@@ -118,6 +119,10 @@ object ChessTutorApp extends JFXApp3:
     
     game += gameInstance
     println("New game created: " + game.foreach(_.toString))
+
+    // Add ChessBoardView to the layout - Testing code
+    val chessBoardView = new ChessBoardView(board)
+    this.rootPane.get.center = chessBoardView // Set the center of the BorderPane to the chess board view
     
   private def generateBoard(): Board =
     val gameBoard = new Board()
