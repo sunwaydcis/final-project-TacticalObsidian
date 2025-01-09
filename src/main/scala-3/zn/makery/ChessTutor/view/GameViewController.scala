@@ -1,12 +1,15 @@
 package zn.makery.ChessTutor.view
 
+import ChessTutor.models.Board
 import javafx.event.ActionEvent
-import javafx.fxml.FXML
+import javafx.fxml.{FXML, FXMLLoader}
 import javafx.scene.control.{Label, TableColumn, TableView}
+import javafx.scene.layout.AnchorPane
 import scalafx.Includes.*
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 import zn.makery.ChessTutor.ChessTutorApp
+import zn.makery.ChessTutor.models.newGame
 
 class GameViewController:
   @FXML private var moveHistoryTable: TableView[Any] = null
@@ -14,6 +17,14 @@ class GameViewController:
   @FXML private var playerTwoElo: Label = null
   @FXML private var playerOneLabel: Label = null
   @FXML private var playerOneElo: Label = null
+  @FXML private var boardContainer: AnchorPane = null
+
+  def initialize(game: newGame) =
+    boardContainer.getChildren.clear() //Clear
+    // Create a new BoardView and add it to the container
+    val boardView = new BoardView(game.board.get)
+    boardContainer.getChildren.add(boardView)
+  end initialize
 
   def doViewNext(action: ActionEvent): Unit =
     println("View Next clicked!")
@@ -60,6 +71,5 @@ class GameViewController:
   private def exitGame(): Unit =
     println("Game Exited Successfully!!")
     val onClick = ChessTutorApp.showGameSelect()
-
 
 

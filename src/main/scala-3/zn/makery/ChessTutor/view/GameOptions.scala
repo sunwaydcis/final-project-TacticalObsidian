@@ -57,8 +57,8 @@ class GameOptions:
         println(s"Player color: ${playerColor.value}, Time cap1: $timeCap1, Time cap2: $timeCap2")
 
         val onClick =
-          ChessTutorApp.newGame(playerColor.value, timeCap1, timeCap2, 100)
-//          ChessTutorApp.showGame()
+          val game = ChessTutorApp.generateGame(playerColor.value, timeCap1, timeCap2, 100)
+          ChessTutorApp.loadGameView()
       case None =>
         throw new Exception("Game Rules cannot be null!")
 

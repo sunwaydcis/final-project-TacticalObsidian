@@ -11,15 +11,14 @@ import scalafx.scene.Scene
 import scalafx.stage.{Modality, Stage}
 import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
 import zn.makery.ChessTutor.models.newGame
-import zn.makery.ChessTutor.view.ChessBoardView
+import zn.makery.ChessTutor.view.BoardView
 
 import java.time.LocalDate
 
 object ChessTutorApp extends JFXApp3:
   val gameHistoryData = new ObservableBuffer[Game]()
-  
-  val game = new ObservableBuffer[newGame]()
-  
+  var gameInstance: newGame = null
+
   //Window root pane
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 
@@ -103,7 +102,6 @@ object ChessTutorApp extends JFXApp3:
     val loader = new FXMLLoader(resource)
     val controller = loader.getController[zn.makery.ChessTutor.view.GameViewController]
     loader.load()
-
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
     this.rootPane.get.center = rootPane
 
@@ -111,23 +109,38 @@ object ChessTutorApp extends JFXApp3:
 
   def showAlert(): Unit = ???
   end showAlert
-  
-  def newGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
-    val board = generateBoard()
-    val gameInstance = new newGame(role, TC1, TC2, AIELO)
-    gameInstance.board = Some(board)
-    
-    game += gameInstance
-    println("New game created: " + game.foreach(_.toString))
 
-    // Add ChessBoardView to the layout - Testing code
-    val chessBoardView = new ChessBoardView(board)
-    this.rootPane.get.center = chessBoardView // Set the center of the BorderPane to the chess board view
-    
+  def loadGameView(): Unit =
+    val resource = getClass.getResource("view/GameView.fxml")
+    val loader = new FXMLLoader(resource)
+    loader.load()
+    val controller = loader.getController[zn.makery.ChessTutor.view.GameViewController]
+    controller.initialize(gameInstance)
+    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
+    this.rootPane.get.center = rootPane
+
+  def generateGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
+    val game = new newGame(role, TC1, TC2, AIELO)
+    game.board = Some(generateBoard())
+    gameInstance = game
+
   private def generateBoard(): Board =
-    val gameBoard = new Board()
-    gameBoard.init()
-    gameBoard
-    
+    val board = new Board()
+    board.init()
+    board
+
+  //  def newGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
+  //    val board = generateBoard()
+  //    val gameInstance = new newGame(role, TC1, TC2, AIELO)
+  //    gameInstance.board = Some(board)
+  //
+  //    game += gameInstance
+  //    println("New game created: " + game.foreach(_.toString))
+  //    showGame()
+
+  //      // Add ChessBoardView to the layout - Testing code
+  //      val BoardView = new BoardView(board)
+  //      this.rootPane.get.center = BoardView // Set the center of the BorderPane to the chess board view
+
 
 end ChessTutorApp
