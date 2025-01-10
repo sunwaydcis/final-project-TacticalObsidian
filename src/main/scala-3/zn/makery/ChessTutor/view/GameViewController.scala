@@ -51,8 +51,6 @@ class GameViewController:
         moveHistoryTable.getSelectionModel.select(currentIndex - 1)
         println("Load Previous")
 
-
-
   def doGamePause(action: ActionEvent): Unit =
     println("Pause clicked!")
 

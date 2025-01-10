@@ -8,7 +8,6 @@ import ChessTutor.models.Board
 import ChessTutor.models.chessPieces.A_ChessPieces
 
 class BoardView(board: Board) extends GridPane:
-  initialize()
   updateBoard()
 
   def initialize() =

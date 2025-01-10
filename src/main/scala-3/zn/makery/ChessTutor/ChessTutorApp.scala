@@ -3,6 +3,7 @@ package zn.makery.ChessTutor
 import ChessTutor.models.{Board, Game}
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
+import javafx.scene.layout.AnchorPane
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
@@ -23,32 +24,6 @@ object ChessTutorApp extends JFXApp3:
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 
   override def start(): Unit =
-    //Test values
-    gameHistoryData += new Game("White", 250, 300){
-      outcome.value = "Checkmate"
-    }
-    gameHistoryData += new Game("White", 270, 320){
-      datePlayed.value = LocalDate.of(2010, 8, 21)
-      outcome.value = "Checkmate"
-      totalTime.value = 560.00
-    }
-    gameHistoryData += new Game("Black", 220, 270){
-      datePlayed.value = LocalDate.of(2080, 7, 12)
-      outcome.value = "Checkmate"
-    }
-    gameHistoryData += new Game("White", 240, 290){
-      datePlayed.value = LocalDate.of(2004, 2, 5)
-      outcome.value = "Checkmate"
-    }
-    gameHistoryData += new Game("Black", 250, 300){
-      datePlayed.value = LocalDate.of(1920, 1, 5)
-      outcome.value = "Checkmate"
-    }
-    gameHistoryData += new Game("Black", 300, 300){
-      datePlayed.value = LocalDate.of(1900, 12, 3)
-      outcome.value = "Checkmate"
-    }
-
     //Load root view
     val rootResource = getClass.getResource("view/RootLayout.fxml")
     val loader = new FXMLLoader(rootResource)
@@ -64,6 +39,13 @@ object ChessTutorApp extends JFXApp3:
     showEntryPoint()
 
   end start
+
+//  def loadChildScenes[Controller](resource: String): Unit =
+//    val loader = new FXMLLoader(getClass.getResource(resource))
+//    loader.load()
+//    val controller = loader.getController[Controller]
+//    val rootPane = loader.getRoot[AnchorPane]
+//    this.rootPane.get.center = rootPane
 
   //Actions (Methods) for ChessTutorApp
   def showEntryPoint(): Unit =
@@ -128,6 +110,34 @@ object ChessTutorApp extends JFXApp3:
     val board = new Board()
     board.init()
     board
+
+  def loadTestValueHistory(): Unit =
+    //Test values
+    gameHistoryData += new Game("White", 250, 300) {
+      outcome.value = "Checkmate"
+    }
+
+    gameHistoryData += new Game("White", 270, 320) {
+      datePlayed.value = LocalDate.of(2010, 8, 21)
+      outcome.value = "Checkmate"
+      totalTime.value = 560.00
+    }
+    gameHistoryData += new Game("Black", 220, 270) {
+      datePlayed.value = LocalDate.of(2080, 7, 12)
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("White", 240, 290) {
+      datePlayed.value = LocalDate.of(2004, 2, 5)
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("Black", 250, 300) {
+      datePlayed.value = LocalDate.of(1920, 1, 5)
+      outcome.value = "Checkmate"
+    }
+    gameHistoryData += new Game("Black", 300, 300) {
+      datePlayed.value = LocalDate.of(1900, 12, 3)
+      outcome.value = "Checkmate"
+    }
 
   //  def newGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
   //    val board = generateBoard()
