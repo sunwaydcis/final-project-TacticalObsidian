@@ -3,13 +3,6 @@ package ChessTutor.models.chessPieces
 import ChessTutor.models.chessPieces.Alliance._
 
 class Rook (_color: Alliance) extends A_ChessPieces(_color):
-  val directions = List(
-    (0,1),
-    (1,0),
-    (0,-1),
-    (-1,0)
-  )
-  
   override val _symbol =
     _color match
       case White => "♖"
@@ -18,6 +11,6 @@ class Rook (_color: Alliance) extends A_ChessPieces(_color):
 
 
 
-object Rook:
+object Rook extends Crosser:
   val material: Int = 5 //All bishops are off material 3
 

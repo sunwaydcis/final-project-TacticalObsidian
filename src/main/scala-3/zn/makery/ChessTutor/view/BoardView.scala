@@ -95,7 +95,7 @@ class BoardView(board: Board) extends GridPane:
         selectedPiece = Some(piece)
 
         //Load all the possible moves a selected piece can make
-        val legalMoves = evaluator.legalMoves(piece, row, col)
+        val legalMoves = piece.moves(row, col)
         showMoves(legalMoves)
 
       case None =>
