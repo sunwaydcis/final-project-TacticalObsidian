@@ -12,6 +12,7 @@ import scalafx.collections.ObservableBuffer
 import zn.makery.ChessTutor.util.Evaluator
 
 class BoardView(board: Board) extends GridPane:
+  val evaluator = new Evaluator(board)
   var selectedPiece: Option[A_ChessPieces] = None
 
 
@@ -94,7 +95,7 @@ class BoardView(board: Board) extends GridPane:
         selectedPiece = Some(piece)
 
         //Load all the possible moves a selected piece can make
-        val legalMoves = Evaluator.legalMoves(piece, row, col)
+        val legalMoves = evaluator.legalMoves(piece, row, col)
         showMoves(legalMoves)
 
       case None =>
