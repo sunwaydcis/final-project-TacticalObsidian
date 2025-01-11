@@ -3,8 +3,32 @@ package ChessTutor.models.chessPieces
 import scala.collection.mutable
 import scala.collection.mutable.Stack
 
+enum Alliance:
+  case White, Black
+
+abstract class A_ChessPieces(val color: Alliance) extends Moveable:
+  val _symbol: String
+  val material: Int = 0
+  var _moveStack: Stack[(Int, Int)] = Stack.empty //Many pieces require the storing of a moveStack. Will be moved to a trait instead
+
+  def moveStack = _moveStack.size
+
+  def move(newCoordinate: (Int, Int)) =
+    _moveStack.push(newCoordinate)
+    
+//TRAITS
+
 trait Moveable:
   def moves(xCoord: Int, yCoord: Int): List[Int]
+
+trait Directional extends Moveable:
+  def direction: Int
+
+  override def moves(xCoord: Int, yCoord: Int): List[Int] =
+    var legalMoves: List[Int] = List()
+    legalMoves = legalMoves:+(8*(xCoord+direction)+yCoord)
+    legalMoves
+    
 
 trait Traversable extends Moveable: //Any chess piece that can move in all directions
   def directions: List[(Int, Int)]
@@ -61,28 +85,5 @@ trait Octet extends Traversable:
     (-2, -1)
   )
 
-trait Directional:
-  def direction : Int
-
-enum Alliance:
-  case White, Black
-
-abstract class A_ChessPieces(val color: Alliance):
-  val _symbol: String
-  val material: Int = 0
-  var _moveStack: Stack[(Int, Int)] = Stack.empty //Many pieces require the storing of a moveStack. Will be moved to a trait instead
-  
-  def moveStack = _moveStack.size
-  def move(newCoordinate: (Int, Int)) =
-    _moveStack.push(newCoordinate)
-    
-//  def symbol: String
-//  def symbol_=(newSymbol:String): Unit =
-//    _symbol = newSymbol 
-
-/**Yes, though moves are a part of the chess pieces. In this implementation, they are purely symbolic
- * The moves of each chess piece will be evaluated by ChessEngine.
- * Therefore, all chessPiece classes will only carry material/visual information
- */
 
   
