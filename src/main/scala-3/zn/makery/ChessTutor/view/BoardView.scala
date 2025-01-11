@@ -71,11 +71,6 @@ class BoardView(board: Board) extends GridPane:
       )
     )
 
-  private def handleClickMove(row: Int, col: Int, cell: StackPane): Unit =
-    board.piece(row, col) match
-      case Some(piece) =>
-        val selectedPiece = Some(piece)
-
 
   private def handleCellClick(row: Int, col: Int, cell: StackPane): Unit =
     //Utility function of HandleCellClick
@@ -108,7 +103,7 @@ class BoardView(board: Board) extends GridPane:
 
   private def doMove(piece: A_ChessPieces, newRow: Int, newCol: Int): Unit =
     board.movePiece(piece, newRow, newCol)
-    updateBoard()
+    updateBoard() //The board is updated each time.
 
 //        piece match
 //          case _: Pawn =>

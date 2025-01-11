@@ -39,6 +39,7 @@ class Board():
     val position: Option[(Int, Int)] = piecePositions.get(piece)
     removePiece(piece, position.get(0), position.get(1))
     placePiece(piece, newRow, newCol)
+    piece._moveStack.push((newRow, newCol))
 
   private def placePiece(piece: A_ChessPieces, row: Int, col: Int) =
     board(row)(col) = Some(piece)
