@@ -5,9 +5,9 @@ import scalafx.scene.paint.Color.*
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
 import ChessTutor.models.Board
-import ChessTutor.models.chessPieces.A_ChessPieces
 import scalafx.scene.input.MouseEvent
 import scalafx.Includes.*
+import ChessTutor.models.chessPieces._
 
 class BoardView(board: Board) extends GridPane:
   updateBoard()
@@ -65,12 +65,24 @@ class BoardView(board: Board) extends GridPane:
       )
     )
 
-  def handleCellClick(row: Int, col: Int, cell: StackPane): Unit =
+  private def handleCellClick(row: Int, col: Int, cell: StackPane): Unit =
     //Test line
     println(s"Clicked on cell at ($row, $col)")
     board.piece(row, col) match
       case Some(piece) =>
-        println(s"Cell contains piece: ${piece._symbol}")
+        println(s"Cell contains piece: ${piece._symbol} ${piece.getClass}")
+        
+        piece match
+          case _: Pawn =>
+            println("Its a Pawn!")
+            if piece.moveStack = 0 then
+              println()
+            
+          case _: Rook =>
+            println("It's a Rook!")
+          case _ =>
+            println("Ooo me don't know!")
+            
       case None =>
         println("Cell is empty")
 
