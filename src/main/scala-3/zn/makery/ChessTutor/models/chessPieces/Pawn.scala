@@ -15,17 +15,17 @@ class Pawn (_color: Alliance) extends A_ChessPieces(_color) with Directional:
       case Black => "♟"
       case _ => throw IllegalArgumentException(s"No such color $_color")
       
-  override def moves(board: Board, yCoord: Int, xCoord: Int): List[Int] =
+  override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     //Two-Step
-    var moves = super[Directional].moves(board, yCoord, xCoord)
+    var moves = super[Directional].moves(board, xCoord, yCoord)
     if moveStack == 0 then
-      moves = moves:+ ((yCoord + direction*2)*8+ xCoord)
+      moves = moves:+ ((xCoord + direction*2)*8+ yCoord)
     
     //Take condition - Standard
-    if board.piece(yCoord + 1, xCoord + 1) == Some then
-      moves = moves:+ ((yCoord + 1 + direction*2)*8+ xCoord + 1)
-    if board.piece(yCoord + 1, xCoord - 1) == Some then
-      moves = moves:+ ((yCoord + 1 + direction*2)*8+ xCoord - 1)
+    if board.piece(xCoord + 1, yCoord + 1) == Some then
+      moves = moves:+ ((xCoord + 1 + direction*2)*8+ yCoord + 1)
+    if board.piece(xCoord + 1, yCoord - 1) == Some then
+      moves = moves:+ ((xCoord + 1 + direction*2)*8+ yCoord - 1)
     moves
 
 object Pawn:

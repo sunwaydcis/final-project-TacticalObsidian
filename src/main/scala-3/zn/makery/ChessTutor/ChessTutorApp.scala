@@ -139,18 +139,4 @@ object ChessTutorApp extends JFXApp3:
       outcome.value = "Checkmate"
     }
 
-  //  def newGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
-  //    val board = generateBoard()
-  //    val gameInstance = new newGame(role, TC1, TC2, AIELO)
-  //    gameInstance.board = Some(board)
-  //
-  //    game += gameInstance
-  //    println("New game created: " + game.foreach(_.toString))
-  //    showGame()
-
-  //      // Add ChessBoardView to the layout - Testing code
-  //      val BoardView = new BoardView(board)
-  //      this.rootPane.get.center = BoardView // Set the center of the BorderPane to the chess board view
-
-
 end ChessTutorApp

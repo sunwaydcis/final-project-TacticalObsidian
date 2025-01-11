@@ -28,7 +28,7 @@ trait Directional extends Moveable:
 
   override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     var legalMoves: List[Int] = List()
-    board.piece(xCoord, yCoord) match
+    board.piece(xCoord+1, yCoord) match
       case Some(piece) =>
         legalMoves.empty
       case None =>
@@ -60,10 +60,10 @@ trait Traversable extends Moveable: //Any chess piece that can move in all direc
         if singleStep then
           rowIterable = -1
           colIterable = -1
-          
+
         if rowIterable != -1 && colIterable != -1 then
-          colIterable += row
-          rowIterable += col
+          rowIterable += row
+          colIterable += col
     legalMoves
     
 
