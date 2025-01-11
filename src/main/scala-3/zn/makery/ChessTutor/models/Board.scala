@@ -2,15 +2,14 @@ package ChessTutor.models
 
 import ChessTutor.models.chessPieces.Alliance.*
 import ChessTutor.models.chessPieces._
-import scalafx.collections.ObservableBuffer
 
 type BoardCoordinate = (Int, Int)
 
-class Board():
+class Board:
   var board: Array[Array[Option[A_ChessPieces]]] = Array.fill(8, 8)(None)
-  var piecePositions : Map[A_ChessPieces, BoardCoordinate] = Map.empty
+  private var piecePositions : Map[A_ChessPieces, BoardCoordinate] = Map.empty
 
-  def init() =
+  def init(): Unit =
     for i <- 0 until 8 do
       placePiece(new Pawn(White), 6, i)
       placePiece(new Pawn(Black), 1, i)

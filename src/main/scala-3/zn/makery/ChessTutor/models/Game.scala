@@ -1,7 +1,7 @@
 package ChessTutor.models
 
 import ChessTutor.models.chessPieces.A_ChessPieces
-import scalafx.beans.property.{DoubleProperty, ObjectProperty, StringProperty}
+import scalafx.beans.property.{ObjectProperty, StringProperty}
 
 import java.time.LocalDate
 
@@ -15,7 +15,7 @@ class Game ( //Constructor parameters
   var playerELO = new StringProperty(playerELOString.toString)
   var aiELO = new StringProperty(aiELOString.toString)
   var datePlayed = ObjectProperty[LocalDate](LocalDate.of(1999, 2, 21))
-  var moveHistory: List[Board] = List.empty
+  private val moveHistory: List[Board] = List.empty
   var currentPlayer: String = "White" //Default
   var captured: List[A_ChessPieces] = List.empty
   var totalMoves = moveHistory.size

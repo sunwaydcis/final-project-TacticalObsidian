@@ -7,18 +7,18 @@ import scalafx.scene.text.Text
 import ChessTutor.models.Board
 import scalafx.scene.input.MouseEvent
 import scalafx.Includes.*
-import ChessTutor.models.chessPieces.{Alliance, *}
+import ChessTutor.models.chessPieces.*
 import scalafx.collections.ObservableBuffer
 import zn.makery.ChessTutor.util.Evaluator
 
 class BoardView(board: Board) extends GridPane:
   val evaluator = new Evaluator(board)
-  var selectedPiece: Option[A_ChessPieces] = None
+  private var selectedPiece: Option[A_ChessPieces] = None
 
 
   updateBoard()
 
-  def initialize() =
+  def initialize(): Unit =
     val cellSize = 50
     //@NameSpace View
     //Build the grid view
@@ -56,7 +56,7 @@ class BoardView(board: Board) extends GridPane:
       )
     )
 
-  def updateBoard(): Unit =
+  private def updateBoard(): Unit =
     children.clear() //Clear the board
     initialize() //Redraw
 
@@ -77,7 +77,7 @@ class BoardView(board: Board) extends GridPane:
     //Utility function of HandleCellClick
     def showMoves(moves: List[Int]): Unit =
       moves.foreach:
-        case targetTile =>
+        targetTile =>
           val targetCell = children.get(targetTile).asInstanceOf[javafx.scene.layout.StackPane]
           targetCell.children.add(new Circle:
             radius = 5

@@ -9,11 +9,11 @@ class Pawn (_color: Alliance) extends A_ChessPieces(_color) with Directional:
     case White => -1
     case Black => 1
   
-  override val _symbol =
+  override val _symbol: String =
     _color match
       case White => "♙"
       case Black => "♟"
-      case _ => throw IllegalArgumentException(s"No such color $_color")
+      case null => throw IllegalArgumentException(s"No such color $_color")
       
   override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     //Two-Step

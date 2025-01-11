@@ -9,16 +9,14 @@ import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
-import scalafx.stage.{Modality, Stage}
 import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
 import zn.makery.ChessTutor.models.newGame
-import zn.makery.ChessTutor.view.BoardView
 
 import java.time.LocalDate
 
 object ChessTutorApp extends JFXApp3:
   val gameHistoryData = new ObservableBuffer[Game]()
-  var gameInstance: newGame = null
+  private var gameInstance: newGame = _
 
   //Window root pane
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
@@ -40,7 +38,8 @@ object ChessTutorApp extends JFXApp3:
 
   end start
 
-  def loadChildScenes[Controller](resource: String, initializeController: Option[Controller => Unit] = None): Unit =
+  //initializeController (Source: GitHub CoPilot)
+  private def loadChildScenes[Controller](resource: String, initializeController: Option[Controller => Unit] = None): Unit =
     val loader = new FXMLLoader(getClass.getResource(resource))
     loader.load()
     val controller = loader.getController[Controller]
