@@ -8,6 +8,7 @@ import ChessTutor.models.Board
 import scalafx.scene.input.MouseEvent
 import scalafx.Includes.*
 import ChessTutor.models.chessPieces.{Alliance, *}
+import scalafx.collections.ObservableBuffer
 import zn.makery.ChessTutor.util.Evaluator
 
 class BoardView(board: Board) extends GridPane:
@@ -86,6 +87,9 @@ class BoardView(board: Board) extends GridPane:
             radius = 5
             fill = Green
           )
+          targetCell.onMouseClicked = (event: MouseEvent) =>
+            println(s"Target cell at (${targetTile/8}, ${targetTile%8}) clicked!")
+            doMove(selectedPiece.get, targetTile/8, targetTile%8)
 
     //Test line
     println(s"Clicked on cell at ($row, $col)")
@@ -97,6 +101,14 @@ class BoardView(board: Board) extends GridPane:
         //Load all the possible moves a selected piece can make
         val legalMoves = Evaluator.legalMoves(piece, row, col)
         showMoves(legalMoves)
+
+      case None =>
+        println("Cell is empty")
+  end handleCellClick
+
+  private def doMove(piece: A_ChessPieces, newRow: Int, newCol: Int): Unit =
+    board.movePiece(piece, newRow, newCol)
+    updateBoard()
 
 //        piece match
 //          case _: Pawn =>
@@ -137,8 +149,6 @@ class BoardView(board: Board) extends GridPane:
 //            println("It's a Rook!")
 //          case _ =>
 //            println("Ooo me don't know!")
-            
-      case None =>
-        println("Cell is empty")
+
 
 
