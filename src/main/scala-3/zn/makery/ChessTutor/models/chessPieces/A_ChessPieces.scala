@@ -1,5 +1,7 @@
 package ChessTutor.models.chessPieces
 
+import ChessTutor.models.Board
+
 import scala.collection.mutable
 import scala.collection.mutable.Stack
 
@@ -19,14 +21,18 @@ abstract class A_ChessPieces(val color: Alliance) extends Moveable:
 //TRAITS
 
 trait Moveable:
-  def moves(xCoord: Int, yCoord: Int): List[Int]
+  def moves(board: Board, xCoord: Int, yCoord: Int): List[Int]
 
 trait Directional extends Moveable:
   def direction: Int
 
-  override def moves(xCoord: Int, yCoord: Int): List[Int] =
+  override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     var legalMoves: List[Int] = List()
-    legalMoves = legalMoves:+(8*(xCoord+direction)+yCoord)
+    board.piece(xCoord, yCoord) match
+      case Some(piece) =>
+        legalMoves.empty
+      case None =>
+        legalMoves = legalMoves:+(8*(xCoord+direction)+yCoord)
     legalMoves
     
 
@@ -36,13 +42,21 @@ trait Traversable extends Moveable: //Any chess piece that can move in all direc
   def singleStep: Boolean = false //For ShortTraversals to be true, else false
 
   //Traversable move by default is a Long Traversable
-  override def moves(xCoord: Int, yCoord: Int): List[Int] =
+  override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     var legalMoves: List[Int] = List()
     for (row, col) <- directions do
       var rowIterable = row + xCoord
       var colIterable = col + yCoord
       while rowIterable >= 0 && rowIterable < 8 && colIterable >= 0 && colIterable < 8 do
-        legalMoves = legalMoves :+ (rowIterable * 8 + colIterable)
+        println(s"Possible moves at (${rowIterable}, ${colIterable})")
+        board.piece(rowIterable, colIterable) match
+          case Some(piece) =>
+            if piece.color != this.asInstanceOf[A_ChessPieces].color then
+              legalMoves = legalMoves :+ (rowIterable * 8 + colIterable)
+            rowIterable = -1
+            colIterable = -1
+          case None =>
+            legalMoves = legalMoves :+ (rowIterable * 8 + colIterable)
         if singleStep then
           rowIterable = -1
           colIterable = -1
