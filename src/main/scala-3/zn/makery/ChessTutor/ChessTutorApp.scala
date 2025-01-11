@@ -40,32 +40,20 @@ object ChessTutorApp extends JFXApp3:
 
   end start
 
-//  def loadChildScenes[Controller](resource: String): Unit =
-//    val loader = new FXMLLoader(getClass.getResource(resource))
-//    loader.load()
-//    val controller = loader.getController[Controller]
-//    val rootPane = loader.getRoot[AnchorPane]
-//    this.rootPane.get.center = rootPane
+  def loadChildScenes[Controller](resource: String): Unit =
+    val loader = new FXMLLoader(getClass.getResource(resource))
+    loader.load()
+    val controller = loader.getController[Controller]
+    val rootPane = loader.getRoot[AnchorPane]
+    this.rootPane.get.center = rootPane
 
   //Actions (Methods) for ChessTutorApp
   def showEntryPoint(): Unit =
-    val resource = getClass.getResource("view/EntryView.fxml")
-    val loader = new FXMLLoader(resource)
-    val controller = loader.getController[zn.makery.ChessTutor.view.EntryViewContoller]
-    loader.load()
-
-    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
-    this.rootPane.get.center = rootPane
+    loadChildScenes[zn.makery.ChessTutor.view.EntryViewContoller]("view/EntryView.fxml")
   end showEntryPoint
 
   def showGameSelect(): Unit =
-    val resource = getClass.getResource("view/GameSelect.fxml")
-    val loader = new FXMLLoader(resource)
-    val controller = loader.getController[zn.makery.ChessTutor.view.GameOptions]
-    loader.load()
-
-    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
-    this.rootPane.get.center = rootPane
+    loadChildScenes[zn.makery.ChessTutor.view.GameOptions]("view/GameSelect.fxml")
   end showGameSelect
 
   def showGameHistory(): Unit =
@@ -89,9 +77,6 @@ object ChessTutorApp extends JFXApp3:
 
   end showGame
 
-  def showAlert(): Unit = ???
-  end showAlert
-
   def loadGameView(): Unit =
     val resource = getClass.getResource("view/GameView.fxml")
     val loader = new FXMLLoader(resource)
@@ -105,6 +90,9 @@ object ChessTutorApp extends JFXApp3:
     val game = new newGame(role, TC1, TC2, AIELO)
     game.board = Some(generateBoard())
     gameInstance = game
+
+  def showAlert(): Unit = ???
+  end showAlert
 
   private def generateBoard(): Board =
     val board = new Board()

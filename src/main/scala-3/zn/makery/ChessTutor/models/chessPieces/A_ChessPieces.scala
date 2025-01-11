@@ -28,7 +28,7 @@ trait Directional extends Moveable:
 
   override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     var legalMoves: List[Int] = List()
-    board.piece(xCoord+1, yCoord) match
+    board.piece(xCoord + direction, yCoord) match
       case Some(piece) =>
         legalMoves.empty
       case None =>
