@@ -2,13 +2,8 @@ package ChessTutor.models.chessPieces
 
 import scala.collection.mutable.Stack
 
-trait isTakeable //King can never be taken - Ends at checkmate. All else can.
-
-trait Promotable:
-  def promote(piece: Takeable): Unit
-
-enum Takeable: //Alternative
-  case Queen, Rook, Bishop, Knight, Pawn
+trait Moveable:
+  val directions: List[Int]
 
 enum Alliance:
   case White, Black
