@@ -60,6 +60,10 @@ trait Traversable extends Moveable: //Any chess piece that can move in all direc
         if singleStep then
           rowIterable = -1
           colIterable = -1
+
+        
+        colIterable += 1
+        rowIterable += 1
     legalMoves
     
 
