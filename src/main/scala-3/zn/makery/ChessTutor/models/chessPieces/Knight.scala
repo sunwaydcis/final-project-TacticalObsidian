@@ -3,7 +3,17 @@ package ChessTutor.models.chessPieces
 import ChessTutor.models.chessPieces.Alliance._
 
 class Knight (_color: Alliance) extends A_ChessPieces(_color):
-  override val material = 3
+  val directions = List(
+    (2, 1),
+    (2, -1),
+    (1, 2),
+    (1, -2),
+    (-1, 2),
+    (-1, -2),
+    (-2, 1),
+    (-2, -1)
+  )
+  
   override val _symbol =
     _color match
       case White => "♘"

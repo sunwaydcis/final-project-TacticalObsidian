@@ -1,6 +1,6 @@
 package ChessTutor.models.chessPieces
 
-import ChessTutor.models.chessPieces.Alliance._
+import ChessTutor.models.chessPieces.Alliance.*
 
 class Pawn (_color: Alliance) extends A_ChessPieces(_color):
   override val _symbol =

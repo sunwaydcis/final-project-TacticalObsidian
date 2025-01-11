@@ -9,12 +9,7 @@ class Bishop (_color: Alliance) extends A_ChessPieces(_color):
     (-1, 1),
     (-1, -1)
   )
-  val directions2 = List(
-    9,
-    7,
-    -7,
-    -9
-  )
+
   override val material = 3
   override val _symbol =
     _color match
