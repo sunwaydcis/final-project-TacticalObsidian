@@ -1,11 +1,13 @@
 package zn.makery.ChessTutor.view
 
-import scalafx.scene.layout.{GridPane, ColumnConstraints, RowConstraints}
-import scalafx.scene.paint.Color._
+import scalafx.scene.layout.{ColumnConstraints, GridPane, RowConstraints, StackPane}
+import scalafx.scene.paint.Color.*
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
 import ChessTutor.models.Board
 import ChessTutor.models.chessPieces.A_ChessPieces
+import scalafx.scene.input.MouseEvent
+import scalafx.Includes.*
 
 class BoardView(board: Board) extends GridPane:
   updateBoard()
@@ -33,14 +35,16 @@ class BoardView(board: Board) extends GridPane:
     //Color the cells
     (0 until 8).foreach(row =>
       (0 until 8).foreach(col =>
-        val cell = new Rectangle {
+        val cell = new StackPane()
+        val tile = new Rectangle {
           width = cellSize
           height = cellSize
           fill = if (row + col) % 2 == 0 then
             Beige else SaddleBrown
         }
-
-        //Add the rectangle (colored cell) to the gridPane
+        cell.children.add(tile)
+        cell.onMouseClicked = (event: MouseEvent) => handleCellClick(row, col, cell)
+        //Add the cell to the grid
         this.add(cell, col, row)
       )
     )
@@ -60,5 +64,14 @@ class BoardView(board: Board) extends GridPane:
         //Do nothing if no piece
       )
     )
+
+  def handleCellClick(row: Int, col: Int, cell: StackPane): Unit =
+    //Test line
+    println(s"Clicked on cell at ($row, $col)")
+    board.piece(row, col) match
+      case Some(piece) =>
+        println(s"Cell contains piece: ${piece._symbol}")
+      case None =>
+        println("Cell is empty")
 
 
