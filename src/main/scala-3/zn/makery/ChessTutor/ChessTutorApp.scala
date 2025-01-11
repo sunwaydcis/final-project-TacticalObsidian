@@ -40,7 +40,7 @@ object ChessTutorApp extends JFXApp3:
 
   end start
 
-  def loadChildScenes[Controller](resource: String): Unit =
+  def loadChildScenes[Controller](resource: String, initializeController: Option[Controller => Unit] = None): Unit =
     val loader = new FXMLLoader(getClass.getResource(resource))
     loader.load()
     val controller = loader.getController[Controller]
@@ -57,27 +57,11 @@ object ChessTutorApp extends JFXApp3:
   end showGameSelect
 
   def showGameHistory(): Unit =
-    val resource = getClass.getResource("view/GameHistory.fxml")
-    val loader = new FXMLLoader(resource)
-    loader.load()
-    val controller = loader.getController[zn.makery.ChessTutor.view.GameHistoryController]
-    controller.initialize()
-
-    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
-    this.rootPane.get.center = rootPane
+    loadChildScenes[zn.makery.ChessTutor.view.GameHistoryController]("view/GameHistory.fxml", Some(_.initialize()))
   end showGameHistory
 
-  def showGame(): Unit =
-    val resource = getClass.getResource("view/GameView.fxml")
-    val loader = new FXMLLoader(resource)
-    val controller = loader.getController[zn.makery.ChessTutor.view.GameViewController]
-    loader.load()
-    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
-    this.rootPane.get.center = rootPane
-
-  end showGame
-
   def loadGameView(): Unit =
+    loadChildScenes[zn.makery.ChessTutor.view.GameViewController]("view/GameView.fxml", Some(_.initialize(gameInstance)))
     val resource = getClass.getResource("view/GameView.fxml")
     val loader = new FXMLLoader(resource)
     loader.load()

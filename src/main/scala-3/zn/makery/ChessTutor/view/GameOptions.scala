@@ -28,9 +28,9 @@ class GameOptions:
   var gameRules = Option[(StringProperty, StringProperty)](playerColor, gameTime)
 
   //Navigation functions
-  @FXML private def doPlay_Test2(action: ActionEvent): Unit =
-    val onClick = ChessTutorApp.showGame()
-  end doPlay_Test2
+//  @FXML private def doPlay_Test2(action: ActionEvent): Unit =
+//    val onClick = ChessTutorApp.showGame()
+//  end doPlay_Test2
 
   @FXML private def doPlay_Test(action: ActionEvent): Unit =
     gameRules match
