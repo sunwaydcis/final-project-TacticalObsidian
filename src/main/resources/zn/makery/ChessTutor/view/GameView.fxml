@@ -3,8 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,17 +15,8 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <SplitPane dividerPositions="0.6" layoutX="-7.0" layoutY="8.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane layoutX="-7.0" layoutY="8.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="174.0">
-                           <children>
-                              <TableView fx:id="moveHistoryTable" prefHeight="282.0" prefWidth="174.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columns>
-                                  <TableColumn minWidth="-1.0" prefWidth="174.0" text="Move History" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="73.0" prefWidth="174.0">
                            <children>
                               <GridPane layoutX="1.0" prefHeight="156.0" prefWidth="174.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -41,12 +30,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                       <children>
-                                          <Button fx:id="prevBtn" layoutY="-10.0" mnemonicParsing="false" onAction="#doViewPrevious" text="Previous" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="10.0" />
-                                          <Button fx:id="nextBtn" layoutX="96.0" mnemonicParsing="false" onAction="#doViewNext" text="Next" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                       </children>
-                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                        <children>
                                           <Button fx:id="pauseBtn" layoutY="-10.0" mnemonicParsing="false" onAction="#doGamePause" text="Pause" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="10.0" />
@@ -75,22 +59,6 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <BorderPane layoutX="24.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <top>
-                        <AnchorPane fx:id="playerTwoBar" minWidth="60.0" prefHeight="60.0" prefWidth="418.0" styleClass="card_bkg" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label fx:id="playerTwoLabel" layoutX="71.0" layoutY="22.0" text="Opponent" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                              <Label fx:id="playerTwoElo" layoutX="109.0" layoutY="22.0" text="Sample Elo" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-                           </children>
-                        </AnchorPane>
-                     </top>
-                     <bottom>
-                        <AnchorPane fx:id="playerOneBar" minWidth="60.0" prefHeight="60.0" prefWidth="418.0" styleClass="card_bkg" BorderPane.alignment="CENTER">
-                           <children>
-                              <Label fx:id="playerOneLabel" layoutX="71.0" layoutY="14.0" text="You" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                              <Label fx:id="playerOneElo" layoutX="124.0" layoutY="46.0" text="Sample Elo" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-                           </children>
-                        </AnchorPane>
-                     </bottom>
                      <center>
                         <AnchorPane fx:id="boardContainer" prefHeight="480.0" prefWidth="418.0" BorderPane.alignment="CENTER" />
                      </center>

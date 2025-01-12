@@ -6,7 +6,7 @@ import scalafx.beans.property.{ObjectProperty, StringProperty}
 
 import java.time.LocalDate
 
-class newGame(player1Color: String, player1TimeCap: Option[Double], player2TimeCap: Option[Double], aiELO: Int):
+class newGame(player1Color: String):
   //Game info variables
   var outcome = new StringProperty("Outcome")
   var totalTime = ObjectProperty[Double](0.0)

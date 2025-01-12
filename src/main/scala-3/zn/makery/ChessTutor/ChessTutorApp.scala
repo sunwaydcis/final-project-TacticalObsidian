@@ -69,8 +69,8 @@ object ChessTutorApp extends JFXApp3:
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
     this.rootPane.get.center = rootPane
 
-  def generateGame(role: String, TC1: Option[Double], TC2: Option[Double], AIELO: Int): Unit =
-    val game = new newGame(role, TC1, TC2, AIELO)
+  def generateGame(role: String): Unit =
+    val game = new newGame(role)
     game.board = Some(generateBoard())
     gameInstance = game
 

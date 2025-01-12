@@ -44,19 +44,7 @@
                               <ToggleButton fx:id="beBlackBtn" mnemonicParsing="false" onAction="#doSelectColorMode" text="Black" toggleGroup="$colorRole" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                           <children>
-                              <ToggleButton fx:id="beUnlimitedBtn" mnemonicParsing="false" onAction="#doSelectTimeMode" text="Unlimited">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="gameTimeMode" />
-                                 </toggleGroup>
-                              </ToggleButton>
-                              <ToggleButton fx:id="beStandardBtn" mnemonicParsing="false" onAction="#doSelectTimeMode" text="10 | 10" toggleGroup="$gameTimeMode" />
-                              <ToggleButton fx:id="beAdvantagedBtn" mnemonicParsing="false" onAction="#doSelectTimeMode" text="10 | 5" toggleGroup="$gameTimeMode" />
-                              <ToggleButton fx:id="beDisadvantagedBtn" mnemonicParsing="false" onAction="#doSelectTimeMode" text="5 | 10" toggleGroup="$gameTimeMode" />
-                              <ToggleButton fx:id="beQuickGameBtn" mnemonicParsing="false" onAction="#doSelectTimeMode" text="5 | 5" toggleGroup="$gameTimeMode" />
-                           </children>
-                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" />
                         <Button fx:id="doPlay" mnemonicParsing="false" onAction="#doPlay_Test" text="Play" />
                      </children>
                      <opaqueInsets>
