@@ -11,10 +11,12 @@ import ChessTutor.models.chessPieces.*
 import scalafx.collections.ObservableBuffer
 import zn.makery.ChessTutor.util.Evaluator
 
+/**
+ * Controls the view of the board. Generates the board view. Violates SRP, TODO seperate responsibilities.
+ * @param board the model
+ */
 class BoardView(board: Board) extends GridPane:
-  val evaluator = new Evaluator(board)
   private var selectedPiece: Option[A_ChessPieces] = None
-
 
   updateBoard()
 
@@ -23,57 +25,55 @@ class BoardView(board: Board) extends GridPane:
     //@NameSpace View
     //Build the grid view
     (0 until 8).foreach(_ =>
-      //Columns
-      columnConstraints.add(
-        new ColumnConstraints{
+      columnConstraints.add( //Columns
+        new ColumnConstraints:
           minWidth = cellSize
           prefWidth = cellSize
-        }
+
       )
-      //Rows
-      rowConstraints.add(
-        new RowConstraints {
+      rowConstraints.add( //Rows
+        new RowConstraints:
           minHeight = cellSize
           prefHeight = cellSize
-        }
       )
     )
 
     //Color the cells
-    (0 until 8).foreach(row =>
-      (0 until 8).foreach(col =>
-        val cell = new StackPane()
-        val tile = new Rectangle {
+    (0 until 8).foreach(row => (0 until 8).foreach(col =>
+      val cell = new StackPane()
+      val tile = new Rectangle:
           width = cellSize
           height = cellSize
           fill = if (row + col) % 2 == 0 then
             Beige else SaddleBrown
-        }
-        cell.children.add(tile)
-        cell.onMouseClicked = (event: MouseEvent) => handleCellClick(row, col, cell)
-        //Add the cell to the grid
-        this.add(cell, col, row)
+
+      cell.children.add(tile) //Add the tile to the stack pane
+      cell.onMouseClicked = (event: MouseEvent) => handleCellClick(row, col, cell) //Add an event listener to it
+      this.add(cell, col, row)  //Add the cell to the grid
       )
     )
 
   private def updateBoard(): Unit =
     children.clear() //Clear the board
-    initialize() //Redraw
+    initialize() //Redraw based on model
 
-    (0 until 8).foreach(row =>
-      (0 until 8).foreach(col =>
+    (0 until 8).foreach(row => (0 until 8).foreach(col =>
         board.piece(row, col) match
           case Some(piece) =>
-            add(new Text(piece._symbol) {fill = Black},
-              col, row)
+            //Gets the appropriate stack pane
+            val cell = children.get(row * 8 + col).asInstanceOf[javafx.scene.layout.StackPane]
+            val text = new Text(piece._symbol):
+              fill = Black
+              style = "-fx-font-size: 32px;"
 
+            cell.children.add(text)
           case None =>
         //Do nothing if no piece
       )
     )
 
-
   private def handleCellClick(row: Int, col: Int, cell: StackPane): Unit =
+    updateBoard()
     //Utility function of HandleCellClick
     def showMoves(moves: List[Int]): Unit =
       moves.foreach:
@@ -95,7 +95,7 @@ class BoardView(board: Board) extends GridPane:
         selectedPiece = Some(piece)
 
         //Load all the possible moves a selected piece can make
-        val legalMoves = evaluator.legalMoves(piece, row, col)
+        val legalMoves = Evaluator.legalMoves(board, piece, row, col)
         showMoves(legalMoves)
 
       case None =>
@@ -106,45 +106,6 @@ class BoardView(board: Board) extends GridPane:
     board.movePiece(piece, newRow, newCol)
     updateBoard() //The board is updated each time.
 
-//        piece match
-//          case _: Pawn =>
-//            println("Its a Pawn!")
-//                println("It hasn't moved yet")
-//                if piece.color == Alliance.White then
-//                  val targetCell1 = children.get((row - 1)*8 + col).asInstanceOf[javafx.scene.layout.StackPane]
-//
-//                  targetCell1.children.add(new Circle{
-//                    radius = 5
-//                    fill = Green
-//                  })
-//
-//                  if piece.moveStack == 0 then
-//                    val targetCell2 = children.get((row - 2)*8 + col).asInstanceOf[javafx.scene.layout.StackPane]
-//                    targetCell2.children.add(new Circle{
-//                      radius = 5
-//                      fill = Green
-//                    })
-//
-//
-//                else
-//                  val targetCell1 = children.get((row + 1)*8 + col).asInstanceOf[javafx.scene.layout.StackPane]
-//                  targetCell1.children.add(new Circle{
-//                    radius = 5
-//                    fill = Green
-//                  })
-//
-//                  if piece.moveStack == 0 then
-//                    val targetCell2 = children.get((row - 2)*8 + col).asInstanceOf[javafx.scene.layout.StackPane]
-//                    targetCell2.children.add(new Circle{
-//                      radius = 5
-//                      fill = Green
-//                    })
-//
-//
-//          case _: Rook =>
-//            println("It's a Rook!")
-//          case _ =>
-//            println("Ooo me don't know!")
 
 
 
