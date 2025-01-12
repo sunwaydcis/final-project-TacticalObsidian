@@ -1,6 +1,6 @@
 package zn.makery.ChessTutor
 
-import ChessTutor.models.{Board, Game}
+import ChessTutor.models.Board
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import javafx.scene.layout.AnchorPane
@@ -10,13 +10,11 @@ import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
 import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
-import zn.makery.ChessTutor.models.newGame
-
-import java.time.LocalDate
+import zn.makery.ChessTutor.models.Game
 
 object ChessTutorApp extends JFXApp3:
   val gameHistoryData = new ObservableBuffer[Game]()
-  private var gameInstance: newGame = _
+  private var gameInstance: Game = _
 
   //Window root pane
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
@@ -69,45 +67,13 @@ object ChessTutorApp extends JFXApp3:
     val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
     this.rootPane.get.center = rootPane
 
-  def generateGame(role: String): Unit =
-    val game = new newGame(role)
-    game.board = Some(generateBoard())
+  def generateGame(whitePlayer: String, blackPlayer: String): Unit =
+    val game = new Game(whitePlayer, blackPlayer, generateBoard())
     gameInstance = game
-
-  def showAlert(): Unit = ???
-  end showAlert
 
   private def generateBoard(): Board =
     val board = new Board()
     board.init()
     board
-
-  def loadTestValueHistory(): Unit =
-    //Test values
-    gameHistoryData += new Game("White", 250, 300) {
-      outcome.value = "Checkmate"
-    }
-
-    gameHistoryData += new Game("White", 270, 320) {
-      datePlayed.value = LocalDate.of(2010, 8, 21)
-      outcome.value = "Checkmate"
-      totalTime.value = 560.00
-    }
-    gameHistoryData += new Game("Black", 220, 270) {
-      datePlayed.value = LocalDate.of(2080, 7, 12)
-      outcome.value = "Checkmate"
-    }
-    gameHistoryData += new Game("White", 240, 290) {
-      datePlayed.value = LocalDate.of(2004, 2, 5)
-      outcome.value = "Checkmate"
-    }
-    gameHistoryData += new Game("Black", 250, 300) {
-      datePlayed.value = LocalDate.of(1920, 1, 5)
-      outcome.value = "Checkmate"
-    }
-    gameHistoryData += new Game("Black", 300, 300) {
-      datePlayed.value = LocalDate.of(1900, 12, 3)
-      outcome.value = "Checkmate"
-    }
 
 end ChessTutorApp

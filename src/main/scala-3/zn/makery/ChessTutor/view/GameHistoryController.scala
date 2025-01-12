@@ -1,6 +1,5 @@
 package zn.makery.ChessTutor.view
 
-import ChessTutor.models.Game
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.{Label, TableColumn, TableView}
@@ -8,6 +7,7 @@ import scalafx.Includes.*
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 import zn.makery.ChessTutor.ChessTutorApp
+import zn.makery.ChessTutor.models.Game
 
 import java.time.LocalDate
 
@@ -44,9 +44,9 @@ class GameHistoryController:
   def initialize() =
     gameHistoryTable.items = ChessTutorApp.gameHistoryData
     //BIND CELLS
-    dateColumn.cellValueFactory = _.value.datePlayed
-    totalTimeColumn.cellValueFactory = _.value.totalTime
-    outcomeColumn.cellValueFactory = _.value.outcome
+//    dateColumn.cellValueFactory = _.value.datePlayed
+//    totalTimeColumn.cellValueFactory = _.value.totalTime
+//    outcomeColumn.cellValueFactory = _.value.outcome
 
 //  private def showGameOverview(game: Option[Game]): Unit =
 //    game match

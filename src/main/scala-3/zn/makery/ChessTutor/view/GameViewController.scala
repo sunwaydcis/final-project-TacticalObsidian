@@ -5,10 +5,11 @@ import ChessTutor.models.chessPieces.Alliance.*
 import javafx.event.ActionEvent
 import javafx.fxml.{FXML, FXMLLoader}
 import javafx.scene.control.{Label, TableColumn, TableView}
-import javafx.scene.layout.AnchorPane
+import javafx.scene.layout.{AnchorPane, VBox}
 import scalafx.Includes.*
+import scalafx.collections.ObservableBuffer
 import zn.makery.ChessTutor.ChessTutorApp
-import zn.makery.ChessTutor.models.newGame
+import zn.makery.ChessTutor.models.{Game, Moves}
 
 class GameViewController:
 //  @FXML private var moveHistoryTable: TableView[Any] = null
@@ -16,41 +17,31 @@ class GameViewController:
 //  @FXML private var playerTwoElo: Label = null
 //  @FXML private var playerOneLabel: Label = null
 //  @FXML private var playerOneElo: Label = null
+  @FXML private var whitePlayer: Label = null
+  @FXML private var whiteTakes: Label = null
+//  @FXML private var WhiteCard: VBox = null
+  @FXML private var blackPlayer: Label = null
+  @FXML private var blackTakes: Label = null
+//  @FXML private var blackCard: VBox = null
+  @FXML private var movesTable: TableView[Moves] = null
   @FXML private var boardContainer: AnchorPane = null
   private var currentTurn: Alliance = White
   private var boardView: BoardView = _
 
-  def initialize(game: newGame) =
+  def initialize(game: Game) =
+    movesTable.items = game.moves //Table
+    whitePlayer.text = game.whiteName
+    blackPlayer.text = game.blackName
+
+    whiteTakes.text = ""
+    blackTakes.text = ""
+
+
     boardContainer.getChildren.clear() //Clear
     // Create a new BoardView and add it to the container
-    boardView = new BoardView(game.board.get)
+    boardView = new BoardView(game.board)
     boardContainer.getChildren.add(boardView)
   end initialize
-
-//  def doViewNext(action: ActionEvent): Unit =
-//    println("View Next clicked!")
-//    if moveHistoryTable.getItems.isEmpty then println("There are no moves!")
-//
-//    else
-//      val currentIndex = moveHistoryTable.selectionModel().getSelectedIndex
-//      if currentIndex != -1 then
-//        println("Already at start of moves table!")
-//      else
-//        moveHistoryTable.getSelectionModel.select(currentIndex + 1)
-//        println("Load Next")
-//
-//  def doViewPrevious(action: ActionEvent): Unit =
-//    println("View Prev clicked!")
-//    if moveHistoryTable.getItems.isEmpty then
-//      println("There are no moves!")
-//
-//    else
-//      val currentIndex = moveHistoryTable.selectionModel().getSelectedIndex
-//      if currentIndex <= 0 then
-//        println("Already at start of moves table!")
-//      else
-//        moveHistoryTable.getSelectionModel.select(currentIndex - 1)
-//        println("Load Previous")
 
   def doGamePause(action: ActionEvent): Unit =
     println("Pause clicked!")
@@ -65,7 +56,6 @@ class GameViewController:
   def doQuit(action: ActionEvent): Unit =
     println("Quit clicked!")
     exitGame()
-
 
   private def exitGame(): Unit =
     println("Game Exited Successfully!!")
