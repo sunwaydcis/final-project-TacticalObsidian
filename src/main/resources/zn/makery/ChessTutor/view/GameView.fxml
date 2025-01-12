@@ -21,7 +21,7 @@
                      <children>
                         <TableView fx:id="movesTable" prefHeight="448.0" prefWidth="236.0" style="-fx-background-color: #444444;">
                           <columns>
-                            <TableColumn prefWidth="235.1999939084053" text="Moves" />
+                            <TableColumn fx:id="moves" prefWidth="235.1999939084053" text="Moves" />
                           </columns>
                         </TableView>
                         <Label alignment="CENTER" text="Game Controls" textAlignment="CENTER" />

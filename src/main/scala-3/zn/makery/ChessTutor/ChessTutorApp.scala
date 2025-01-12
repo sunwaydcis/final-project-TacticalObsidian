@@ -15,7 +15,7 @@ import zn.makery.ChessTutor.models.Game
 object ChessTutorApp extends JFXApp3:
   val gameHistoryData = new ObservableBuffer[Game]()
   private var gameInstance: Game = _
-
+  
   //Window root pane
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 

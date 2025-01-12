@@ -9,15 +9,16 @@ import scalafx.scene.input.MouseEvent
 import scalafx.Includes.*
 import ChessTutor.models.chessPieces.*
 import scalafx.collections.ObservableBuffer
+import zn.makery.ChessTutor.models.{Game, Moves}
 import zn.makery.ChessTutor.util.Evaluator
 
 /**
  * Controls the view of the board. Generates the board view. Violates SRP, TODO seperate responsibilities.
  * @param board the model
  */
-class BoardView(board: Board) extends GridPane:
+class BoardView(game: Game) extends GridPane:
   private var selectedPiece: Option[A_ChessPieces] = None
-
+  private val board = game.board
   updateBoard()
 
   def initialize(): Unit =
@@ -102,9 +103,25 @@ class BoardView(board: Board) extends GridPane:
         println("Cell is empty")
   end handleCellClick
 
+  //Moves the piece from the board
   private def doMove(piece: A_ChessPieces, newRow: Int, newCol: Int): Unit =
     board.movePiece(piece, newRow, newCol)
     updateBoard() //The board is updated each time.
+
+    //Returns a letter for correspondent board column
+    val column  = newCol match
+      case 0 => "A"
+      case 1 => "B"
+      case 2 => "C"
+      case 3 => "D"
+      case 4 => "E"
+      case 5 => "F"
+      case 6 => "G"
+      case 7 => "H"
+
+    //Returns chess correct position (Example: (0, 7) => h1
+    val newPosition = String.format(s"$column$newRow")
+    game.moves +=  Moves(piece, newPosition, None)
 
 
 
