@@ -2,19 +2,11 @@ package ChessTutor.models.chessPieces
 
 import ChessTutor.models.Board
 import ChessTutor.models.chessPieces.Alliance.*
-
 import scala.collection.mutable
 import scala.collection.mutable.Stack
 
-
-enum Alliance:
-  case White, Black
-end Alliance
-
-
 abstract class A_ChessPieces(val color: Alliance) extends Moveable:
   val _symbol: String
-  val material: Int = 0
   var _moveStack: Stack[(Int, Int)] = Stack.empty //Many pieces require the storing of a moveStack. Will be moved to a trait instead
 
   def moveStack = _moveStack.size

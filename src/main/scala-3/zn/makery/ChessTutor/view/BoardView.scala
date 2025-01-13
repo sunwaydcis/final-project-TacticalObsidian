@@ -4,7 +4,6 @@ import scalafx.scene.layout.{ColumnConstraints, GridPane, RowConstraints, StackP
 import scalafx.scene.paint.Color.*
 import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.scene.text.Text
-import ChessTutor.models.Board
 import scalafx.scene.input.MouseEvent
 import scalafx.Includes.*
 import ChessTutor.models.chessPieces.*
@@ -19,9 +18,9 @@ import zn.makery.ChessTutor.util.ChessEngine
 class BoardView(game: Game) extends GridPane:
   private var selectedPiece: Option[A_ChessPieces] = None
   private val board = game.board
-  updateBoard()
+  updateBoard
 
-  def initialize(): Unit =
+  def initialize: Unit =
     val cellSize = 50
     //@NameSpace View
     //Build the grid view
@@ -54,9 +53,9 @@ class BoardView(game: Game) extends GridPane:
       )
     )
 
-  private def updateBoard(): Unit =
-    children.clear() //Clear the board
-    initialize() //Redraw based on model
+  private def updateBoard: Unit =
+    children.clear //Clear the board
+    initialize //Redraw based on model
 
     (0 until 8).foreach(row => (0 until 8).foreach(col =>
         board.piece(row, col) match
@@ -74,7 +73,7 @@ class BoardView(game: Game) extends GridPane:
     )
 
   private def handleCellClick(row: Int, col: Int, cell: StackPane): Unit =
-    updateBoard()
+    updateBoard
     //Utility function of HandleCellClick
     def showMoves(moves: List[Int]): Unit =
       moves.foreach:
@@ -106,7 +105,7 @@ class BoardView(game: Game) extends GridPane:
   //Moves the piece from the board
   private def doMove(piece: A_ChessPieces, newRow: Int, newCol: Int): Unit =
     board.movePiece(piece, newRow, newCol)
-    updateBoard() //The board is updated each time.
+    updateBoard //The board is updated each time.
 
     //Returns a letter for correspondent board column
     val column  = newCol match

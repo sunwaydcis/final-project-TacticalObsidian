@@ -4,7 +4,8 @@ import ChessTutor.models.Board
 import ChessTutor.models.chessPieces.Alliance.*
 
 class Pawn (_color: Alliance) extends A_ChessPieces(_color) with Directional:
-
+  def promote =  println("Promoting")
+  
   override def direction : Int =
     this._color match
     case White => -1
@@ -46,7 +47,5 @@ class Pawn (_color: Alliance) extends A_ChessPieces(_color) with Directional:
         //do nothing
     moves
 
-object Pawn:
-  val material: Int = 1
 
 

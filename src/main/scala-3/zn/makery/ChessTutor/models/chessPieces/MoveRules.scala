@@ -2,28 +2,29 @@ package ChessTutor.models.chessPieces
 
 import ChessTutor.models.Board
 
+enum Alliance:
+  case White, Black
+end Alliance
+
 trait Moveable:
   def moves(board: Board, xCoord: Int, yCoord: Int): List[Int]
-end Moveable
-
 
 trait Directional extends Moveable:
   def direction: Int
 
   override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     var legalMoves: List[Int] = List()
-    board.piece(xCoord + direction, yCoord) match
-      case Some(piece) =>
-        legalMoves.empty
-        legalMoves
-      case None =>
-        legalMoves = legalMoves:+(8*(xCoord+direction)+yCoord)
+    val afterMoveRow = xCoord+direction
+    if afterMoveRow >= 0 && afterMoveRow < 8 then
+      board.piece(xCoord + direction, yCoord) match
+        case Some(piece) =>
+          legalMoves = legalMoves.empty
+        case None =>
+          legalMoves = legalMoves:+(8*(xCoord+direction)+yCoord)
     legalMoves
-
   end moves
 
 end Directional
-
 
 trait Traversable extends Moveable: //Any chess piece that can move in all directions
   def directions: List[(Int, Int)]
@@ -100,4 +101,4 @@ trait Octet extends Traversable:
   )
 
 
-  
+

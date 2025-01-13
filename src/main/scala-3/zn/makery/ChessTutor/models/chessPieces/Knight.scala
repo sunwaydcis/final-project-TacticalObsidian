@@ -10,6 +10,4 @@ class Knight (_color: Alliance) extends A_ChessPieces(_color) with Octet with Sh
       case Black => "♞"
       case null => throw IllegalArgumentException(s"No such color $_color")
 
-object Knight:
-  val material: Int = 3 //All knights are off material 3
 

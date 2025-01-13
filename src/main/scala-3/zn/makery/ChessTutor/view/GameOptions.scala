@@ -2,7 +2,7 @@ package zn.makery.ChessTutor.view
 
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import zn.makery.ChessTutor.ChessTutorApp
+import zn.makery.ChessTutor.DownWithTheKingApp
 import javafx.scene.control.TextField
 import scalafx.Includes.*
 
@@ -12,11 +12,9 @@ class GameOptions:
   @FXML private var blackName: TextField = _
 
   @FXML private def doPlay_Test(action: ActionEvent): Unit =
-      val onClick =
-        ChessTutorApp.generateGame(whiteName.text.value, blackName.text.value)
-        ChessTutorApp.loadGameView()
+    val onClick =
+        DownWithTheKingApp.generateGame(whiteName.text.value, blackName.text.value)
+        DownWithTheKingApp.gameView
 
-  @FXML private def doBackTrack(action: ActionEvent): Unit =
-    val onClick = ChessTutorApp.showEntryPoint()
-  end doBackTrack
+  @FXML private def doBackTrack(action: ActionEvent): Unit = DownWithTheKingApp.entryView 
 

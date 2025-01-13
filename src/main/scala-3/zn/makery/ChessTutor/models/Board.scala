@@ -9,7 +9,7 @@ class Board:
   var board: Array[Array[Option[A_ChessPieces]]] = Array.fill(8, 8)(None)
   private var piecePositions : Map[A_ChessPieces, BoardCoordinate] = Map.empty
 
-  def init(): Unit =
+  def init: Unit =
     for i <- 0 until 8 do
       placePiece(new Pawn(White), 6, i)
       placePiece(new Pawn(Black), 1, i)
@@ -31,7 +31,10 @@ class Board:
     placePiece(new Bishop(Black), 0, 5)
     placePiece(new Knight(Black), 0, 6)
     placePiece(new Rook(Black), 0, 7)
-  
+
+  def position(piece: A_ChessPieces) =
+    piecePositions.get(piece)
+
   def piece(row: Int, col: Int) = board(row)(col)
 
   def movePiece(piece: A_ChessPieces, newRow: Int, newCol: Int) =
@@ -43,6 +46,13 @@ class Board:
   private def placePiece(piece: A_ChessPieces, row: Int, col: Int) =
     board(row)(col) = Some(piece)
     piecePositions += (piece -> (row, col))
+
+    piece match
+      case pawn: Pawn =>
+        if position(pawn).get._1 == 7 && pawn.color == Black then pawn.promote
+        else if position(pawn).get._1 == 0 && pawn.color == White then pawn.promote
+      case _ =>
+        //do nothing
 
   private def removePiece(piece: A_ChessPieces, row: Int, col: Int) =
     board(row)(col) = None
