@@ -10,7 +10,7 @@ import scalafx.Includes.*
 import ChessTutor.models.chessPieces.*
 import scalafx.collections.ObservableBuffer
 import zn.makery.ChessTutor.models.{Game, Moves}
-import zn.makery.ChessTutor.util.Evaluator
+import zn.makery.ChessTutor.util.ChessEngine
 
 /**
  * Controls the view of the board. Generates the board view. Violates SRP, TODO seperate responsibilities.
@@ -96,7 +96,7 @@ class BoardView(game: Game) extends GridPane:
         selectedPiece = Some(piece)
 
         //Load all the possible moves a selected piece can make
-        val legalMoves = Evaluator.legalMoves(board, piece, row, col)
+        val legalMoves = ChessEngine.legalMoves(board, piece, row, col)
         showMoves(legalMoves)
 
       case None =>
