@@ -4,20 +4,19 @@ import scalafx.scene.layout.{ColumnConstraints, GridPane, RowConstraints, StackP
 import scalafx.scene.paint.Color.*
 import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.scene.text.Text
-import ChessTutor.models.Board
 import scalafx.scene.input.MouseEvent
 import scalafx.Includes.*
 import ChessTutor.models.chessPieces.*
 import scalafx.collections.ObservableBuffer
+import zn.makery.ChessTutor.ChessTutorApp
 import zn.makery.ChessTutor.models.{Game, Moves}
-import zn.makery.ChessTutor.util.ChessEngine
 
 /**
  * Controls the view of the board. Generates the board view. Violates SRP, TODO seperate responsibilities.
- * @param board the model
+ * @param game the model
  */
 class BoardView(game: Game) extends GridPane:
-  private var selectedPiece: Option[A_ChessPieces] = None
+  private var selectedPiece: Option[B_ChessPieces] = None
   private val board = game.board
   updateBoard()
 
@@ -92,21 +91,36 @@ class BoardView(game: Game) extends GridPane:
     println(s"Clicked on cell at ($row, $col)")
     board.piece(row, col) match
       case Some(piece) =>
-        println(s"Cell contains piece: ${piece._symbol} ${piece.getClass}")
         selectedPiece = Some(piece)
-
-        //Load all the possible moves a selected piece can make
-        val legalMoves = ChessEngine.legalMoves(board, piece, row, col)
-        showMoves(legalMoves)
-
+//        println(s"Cell contains piece: ${piece._symbol} ${piece.getClass}")
+          showMoves(piece.moves(board, row, col))
       case None =>
-        println("Cell is empty")
+        //Do nothing
   end handleCellClick
 
   //Moves the piece from the board
-  private def doMove(piece: A_ChessPieces, newRow: Int, newCol: Int): Unit =
+  private def doMove(piece: B_ChessPieces, newRow: Int, newCol: Int): Unit =
     board.movePiece(piece, newRow, newCol)
     updateBoard() //The board is updated each time.
+
+    //Checks if the opposing king has been taken for win condition
+    val opposingKingColor = piece.color match
+      case Alliance.White => Alliance.Black
+      case Alliance.Black => Alliance.White
+
+    // Find the position of the opposing king
+    val opposingKingPosition = board.piecePositions.find {
+      case (p, _) => p.isInstanceOf[King] && p.color == opposingKingColor
+    }.map(_._2)
+
+    opposingKingPosition match
+      case Some((kingRow, kingCol)) =>
+        val end = opposingKingPosition.get
+        if end == (newRow, newCol) then
+          ChessTutorApp.outcome = s"${piece.color} Won!" //Whoever made the last move won
+          ChessTutorApp.showPersonEditDialog()
+      case None =>
+
 
     //Returns a letter for correspondent board column
     val column  = newCol match

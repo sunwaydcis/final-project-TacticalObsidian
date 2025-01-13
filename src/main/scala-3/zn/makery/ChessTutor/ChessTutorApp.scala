@@ -7,15 +7,16 @@ import javafx.scene.layout.AnchorPane
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
-import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
-import zn.makery.ChessTutor.ChessTutorApp.{getClass, stage}
-import zn.makery.ChessTutor.models.Game
+import scalafx.stage.{Modality, Stage}
+import ChessTutorApp.{getClass, stage}
+import zn.makery.ChessTutor.models.{Game, Outcome}
+import zn.makery.ChessTutor.view.WinController
 
 object ChessTutorApp extends JFXApp3:
-  val gameHistoryData = new ObservableBuffer[Game]()
-  private var gameInstance: Game = _
-  
+  private var _game: Game = _
+  private var _outcome: String = _
+
   //Window root pane
   private var rootPane: Option[scalafx.scene.layout.BorderPane] = None
 
@@ -32,12 +33,12 @@ object ChessTutorApp extends JFXApp3:
         root = rootPane.get
 
     //Load app entry point.
-    showEntryPoint()
+    entryPane
 
   end start
 
   //initializeController (Source: GitHub CoPilot)
-  private def loadChildScenes[Controller](resource: String, initializeController: Option[Controller => Unit] = None): Unit =
+  private def childScene[Controller](resource: String, initializeController: Option[Controller => Unit] = None): Unit =
     val loader = new FXMLLoader(getClass.getResource(resource))
     loader.load()
     val controller = loader.getController[Controller]
@@ -45,35 +46,48 @@ object ChessTutorApp extends JFXApp3:
     this.rootPane.get.center = rootPane
 
   //Actions (Methods) for ChessTutorApp
-  def showEntryPoint(): Unit =
-    loadChildScenes[zn.makery.ChessTutor.view.EntryViewContoller]("view/EntryView.fxml")
-  end showEntryPoint
+  def entryPane = childScene[zn.makery.ChessTutor.view.EntryViewContoller]("view/EntryView.fxml")
 
-  def showGameSelect(): Unit =
-    loadChildScenes[zn.makery.ChessTutor.view.GameOptions]("view/GameSelect.fxml")
-  end showGameSelect
+  def gameSelectionPane = childScene[zn.makery.ChessTutor.view.GameSelectController]("view/GameSelect.fxml")
 
-  def showGameHistory(): Unit =
-    loadChildScenes[zn.makery.ChessTutor.view.GameHistoryController]("view/GameHistory.fxml", Some(_.initialize()))
-  end showGameHistory
-
-  def loadGameView(): Unit =
-    loadChildScenes[zn.makery.ChessTutor.view.GameViewController]("view/GameView.fxml", Some(_.initialize(gameInstance)))
-    val resource = getClass.getResource("view/GameView.fxml")
-    val loader = new FXMLLoader(resource)
-    loader.load()
-    val controller = loader.getController[zn.makery.ChessTutor.view.GameViewController]
-    controller.initialize(gameInstance)
-    val rootPane = loader.getRoot[jfxs.layout.AnchorPane]
-    this.rootPane.get.center = rootPane
+  def gamePane = childScene[zn.makery.ChessTutor.view.GameViewController]("view/GameView.fxml", Some(_.initialize))
 
   def generateGame(whitePlayer: String, blackPlayer: String): Unit =
-    val game = new Game(whitePlayer, blackPlayer, generateBoard())
-    gameInstance = game
+    game = new Game(whitePlayer, blackPlayer, generateBoard)
 
-  private def generateBoard(): Board =
-    val board = new Board()
-    board.init()
+  def showPersonEditDialog(): Boolean =
+    val loader = new FXMLLoader(getClass.getResource("view/WinView.fxml"))
+    loader.load()
+    val roots2 = loader.getRoot[jfxs.Parent]
+    val control = loader.getController[WinController]
+
+    val dialog = new Stage():
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      scene = new Scene:
+        root = roots2
+    
+    control.dialogStage = dialog
+    control.outcome = outcome
+    dialog.showAndWait()
+    control.okClicked
+  
+  def game = _game
+
+  def game_=(newGame: Game)=
+    _game = newGame
+
+  def win(winnerName: String) =
+    outcome = winnerName
+
+  def outcome = _outcome
+
+  def outcome_=(newOutcome: String) =
+    _outcome = newOutcome
+
+  private def generateBoard: Board =
+    val board = new Board
+    board.initialize
     board
 
 end ChessTutorApp

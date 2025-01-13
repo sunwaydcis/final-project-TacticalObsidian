@@ -6,17 +6,14 @@ import zn.makery.ChessTutor.ChessTutorApp
 import javafx.scene.control.TextField
 import scalafx.Includes.*
 
-class GameOptions:
+class GameSelectController:
 
   @FXML private var whiteName: TextField = _
   @FXML private var blackName: TextField = _
 
   @FXML private def doPlay_Test(action: ActionEvent): Unit =
-      val onClick =
         ChessTutorApp.generateGame(whiteName.text.value, blackName.text.value)
-        ChessTutorApp.loadGameView()
+        ChessTutorApp.gamePane
 
-  @FXML private def doBackTrack(action: ActionEvent): Unit =
-    val onClick = ChessTutorApp.showEntryPoint()
-  end doBackTrack
+  @FXML private def doBackTrack(action: ActionEvent): Unit = ChessTutorApp.entryPane
 

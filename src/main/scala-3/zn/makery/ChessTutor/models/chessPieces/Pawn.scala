@@ -3,7 +3,7 @@ package ChessTutor.models.chessPieces
 import ChessTutor.models.Board
 import ChessTutor.models.chessPieces.Alliance.*
 
-class Pawn (_color: Alliance) extends A_ChessPieces(_color) with Directional:
+class Pawn (_color: Alliance) extends B_ChessPieces(_color) with Directional:
 
   override def direction : Int =
     this._color match
@@ -45,8 +45,5 @@ class Pawn (_color: Alliance) extends A_ChessPieces(_color) with Directional:
       case None =>
         //do nothing
     moves
-
-object Pawn:
-  val material: Int = 1
 
 

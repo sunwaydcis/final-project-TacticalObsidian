@@ -1,11 +1,13 @@
 package ChessTutor.models.chessPieces
 
 import ChessTutor.models.Board
+import zn.makery.ChessTutor.models.casts.Coordinate
+
+enum Alliance:
+  case White, Black
 
 trait Moveable:
   def moves(board: Board, xCoord: Int, yCoord: Int): List[Int]
-end Moveable
-
 
 trait Directional extends Moveable:
   def direction: Int
@@ -13,20 +15,13 @@ trait Directional extends Moveable:
   override def moves(board: Board, xCoord: Int, yCoord: Int): List[Int] =
     var legalMoves: List[Int] = List()
     board.piece(xCoord + direction, yCoord) match
-      case Some(piece) =>
-        legalMoves.empty
-        legalMoves
+      case Some(piece) => //do nothing
       case None =>
         legalMoves = legalMoves:+(8*(xCoord+direction)+yCoord)
     legalMoves
 
-  end moves
-
-end Directional
-
-
 trait Traversable extends Moveable: //Any chess piece that can move in all directions
-  def directions: List[(Int, Int)]
+  def directions: List[Coordinate]
 
   def singleStep: Boolean = false //For ShortTraversals to be true, else false
 
@@ -47,7 +42,7 @@ trait Traversable extends Moveable: //Any chess piece that can move in all direc
         println(s"Possible moves at (${rowIterable}, ${colIterable})")
         board.piece(rowIterable, colIterable) match
           case Some(piece) =>
-            if piece.color != this.asInstanceOf[A_ChessPieces].color then
+            if piece.color != this.asInstanceOf[B_ChessPieces].color then
               legalMoves = legalMoves :+ (rowIterable * 8 + colIterable)
             rowIterable = -1
             colIterable = -1
@@ -66,38 +61,23 @@ trait Traversable extends Moveable: //Any chess piece that can move in all direc
 trait ShortTraversable extends Traversable:
   override def singleStep = true
 
-
 trait Diagonal extends Traversable:
   override def directions = List(
-    (1, 1),
-    (1, -1),
-    (-1, 1),
-    (-1, -1)
-  )
+    (1, 1), (1, -1),
+    (-1, 1), (-1, -1))
 
 trait Crosser extends Traversable:
   override def directions = List(
-    (0, 1),
-    (0, -1),
-    (1, 0),
-    (-1, 0)
-  )
+    (0, 1), (0, -1),
+    (1, 0), (-1, 0))
 
 trait AllDirections extends Traversable with Crosser with Diagonal:
-  override def directions =
-    super[Diagonal].directions ++ super[Crosser].directions //Combines both directions
+  override def directions = super[Diagonal].directions ++ super[Crosser].directions //Combines both directions
 
 trait Octet extends Traversable:
   override def directions = List(
-    (2, 1),
-    (2, -1),
-    (1, 2),
-    (1, -2),
-    (-1, 2),
-    (-1, -2),
-    (-2, 1),
-    (-2, -1)
-  )
+    (2, 1), (2, -1), (1, 2), (1, -2),
+    (-1, 2), (-1, -2), (-2, 1), (-2, -1))
 
 
   
