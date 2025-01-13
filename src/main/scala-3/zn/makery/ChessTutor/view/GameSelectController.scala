@@ -8,12 +8,12 @@ import scalafx.Includes.*
 
 class GameSelectController:
 
-  @FXML private var whiteName: TextField = _
-  @FXML private var blackName: TextField = _
+  @FXML private var whiteName: TextField = null
+  @FXML private var blackName: TextField = null
 
   @FXML private def doPlay_Test(action: ActionEvent): Unit =
         ChessTutorApp.generateGame(whiteName.text.value, blackName.text.value)
-        ChessTutorApp.gamePane
+        ChessTutorApp.gamePane()
 
-  @FXML private def doBackTrack(action: ActionEvent): Unit = ChessTutorApp.entryPane
+  @FXML private def doBackTrack(action: ActionEvent): Unit = ChessTutorApp.entryPane()
 

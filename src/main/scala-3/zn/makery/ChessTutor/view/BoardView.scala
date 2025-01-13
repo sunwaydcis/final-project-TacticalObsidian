@@ -118,7 +118,7 @@ class BoardView(game: Game) extends GridPane:
         val end = opposingKingPosition.get
         if end == (newRow, newCol) then
           ChessTutorApp.outcome = s"${piece.color} Won!" //Whoever made the last move won
-          ChessTutorApp.showPersonEditDialog()
+          ChessTutorApp.winDialog()
       case None =>
 
 

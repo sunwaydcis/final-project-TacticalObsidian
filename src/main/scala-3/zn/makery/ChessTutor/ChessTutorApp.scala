@@ -33,7 +33,7 @@ object ChessTutorApp extends JFXApp3:
         root = rootPane.get
 
     //Load app entry point.
-    entryPane
+    entryPane()
 
   end start
 
@@ -46,16 +46,16 @@ object ChessTutorApp extends JFXApp3:
     this.rootPane.get.center = rootPane
 
   //Actions (Methods) for ChessTutorApp
-  def entryPane = childScene[zn.makery.ChessTutor.view.EntryViewContoller]("view/EntryView.fxml")
+  def entryPane(): Unit = childScene[zn.makery.ChessTutor.view.EntryViewContoller]("view/EntryView.fxml")
 
-  def gameSelectionPane = childScene[zn.makery.ChessTutor.view.GameSelectController]("view/GameSelect.fxml")
+  def gameSelectionPane(): Unit = childScene[zn.makery.ChessTutor.view.GameSelectController]("view/GameSelect.fxml")
 
-  def gamePane = childScene[zn.makery.ChessTutor.view.GameViewController]("view/GameView.fxml", Some(_.initialize))
+  def gamePane(): Unit = childScene[zn.makery.ChessTutor.view.GameViewController]("view/GameView.fxml", Some(_.initialize))
 
   def generateGame(whitePlayer: String, blackPlayer: String): Unit =
     game = new Game(whitePlayer, blackPlayer, generateBoard)
 
-  def showPersonEditDialog(): Boolean =
+  def winDialog(): Boolean =
     val loader = new FXMLLoader(getClass.getResource("view/WinView.fxml"))
     loader.load()
     val roots2 = loader.getRoot[jfxs.Parent]
@@ -72,17 +72,17 @@ object ChessTutorApp extends JFXApp3:
     dialog.showAndWait()
     control.okClicked
   
-  def game = _game
+  def game: Game = _game
 
-  def game_=(newGame: Game)=
+  def game_=(newGame: Game): Unit =
     _game = newGame
 
-  def win(winnerName: String) =
+  def win(winnerName: String): Unit =
     outcome = winnerName
 
-  def outcome = _outcome
+  def outcome: String = _outcome
 
-  def outcome_=(newOutcome: String) =
+  def outcome_=(newOutcome: String): Unit =
     _outcome = newOutcome
 
   private def generateBoard: Board =

@@ -38,6 +38,6 @@ class GameViewController:
     boardContainer.children.add(boardView)
   end initialize
   
-  def doQuit(action: ActionEvent): Unit = ChessTutorApp.gameSelectionPane
+  def doQuit(action: ActionEvent): Unit = ChessTutorApp.gameSelectionPane()
 
 

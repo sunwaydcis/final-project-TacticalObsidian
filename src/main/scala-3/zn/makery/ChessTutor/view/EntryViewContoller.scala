@@ -8,4 +8,4 @@ import javafx.event.ActionEvent
  */
 
 class EntryViewContoller:
-  def handlePlayBtn(action: ActionEvent) = ChessTutorApp.gameSelectionPane
+  def handlePlayBtn(action: ActionEvent): Unit = ChessTutorApp.gameSelectionPane()
