@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle
 import scalafx.stage.Stage
 import zn.makery.ChessTutor.ChessTutorApp
 
-class WinController():
+class WinController:
   @FXML private var winBox: Label = null
   @FXML private var winBkg: Rectangle = null
 

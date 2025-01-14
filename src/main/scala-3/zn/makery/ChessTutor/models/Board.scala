@@ -5,13 +5,8 @@ import ChessTutor.models.chessPieces.*
 import zn.makery.ChessTutor.models.casts.Coordinate
 
 class Board:
-  var board: Array[Array[Option[B_ChessPieces]]] = Array.fill(8, 8)(None)
-  var piecePositions = Map[B_ChessPieces, Coordinate]()
-  private var possibleMoves = Map[B_ChessPieces, List[Int]]()
-  private var isCheck = false
-  private var isCheckmate = false
-  private var isStalemate = false
-  private var isDraw = false
+  private val _board: Array[Array[Option[B_ChessPieces]]] = Array.fill(8, 8)(None)
+  private var _piecePositions = Map[B_ChessPieces, Coordinate]()
 
   def initialize: Unit =
     for i <- 0 until 8 do
@@ -36,27 +31,28 @@ class Board:
     placePiece(new Knight(Black), 0, 6)
     placePiece(new Rook(Black), 0, 7)
 
-  def position(piece: B_ChessPieces) = piecePositions.get(piece).get
-
-  def piece(row: Int, col: Int) = board(row)(col)
+  def board = _board
+  def piecePositions = _piecePositions
+  def positionOf(piece: B_ChessPieces) = _piecePositions.get(piece).get
+  def pieceAt(row: Int, col: Int) = _board(row)(col)
 
   def movePiece(piece: B_ChessPieces, newRow: Int, newCol: Int) =
-    val position: Option[(Int, Int)] = piecePositions.get(piece)
+    val position: Option[(Int, Int)] = _piecePositions.get(piece)
     removePiece(piece, position.get(0), position.get(1))
     placePiece(piece, newRow, newCol)
     piece._moveStack.push((newRow, newCol))
 
-    
-    
+
+
 
 
   private def placePiece(piece: B_ChessPieces, row: Int, col: Int) =
-    board(row)(col) = Some(piece)
-    piecePositions += (piece -> (row, col))
+    _board(row)(col) = Some(piece)
+    _piecePositions += (piece -> (row, col))
 
   private def removePiece(piece: B_ChessPieces, row: Int, col: Int) =
-    board(row)(col) = None
-    piecePositions = piecePositions - piece
+    _board(row)(col) = None
+    _piecePositions = _piecePositions - piece
 
 
 

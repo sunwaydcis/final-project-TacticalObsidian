@@ -18,26 +18,20 @@ class GameViewController:
   @FXML private var movesTable: TableView[Moves] = null
   @FXML private var moves: TableColumn[Moves, String] = null
   @FXML private var boardContainer: AnchorPane = null
-  private var currentTurn: Alliance = White
   private var boardView: BoardView = null
   private var game : Game = null
 
   def initialize: Unit =
     game = ChessTutorApp.game
     movesTable.items = game.moves //Table
-    moves.cellValueFactory =
-      (cellData => new StringProperty(cellData.value.move))
-
+    moves.cellValueFactory = cellData => new StringProperty(cellData.value.move)
     whitePlayer.text = game.whiteName
     blackPlayer.text = game.blackName
-
-
     boardContainer.children.clear //Clear
-    // Create a new BoardView and add it to the container
-    boardView = new BoardView(game)
+    boardView = new BoardView(game) // Create a new BoardView and add it to the container
     boardContainer.children.add(boardView)
   end initialize
   
-  def doQuit(action: ActionEvent): Unit = ChessTutorApp.gameSelectionPane()
+  @FXML private def doQuit(action: ActionEvent): Unit = ChessTutorApp.gameSelectionPane()
 
 

@@ -10,7 +10,7 @@ import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.stage.{Modality, Stage}
 import ChessTutorApp.{getClass, stage}
-import zn.makery.ChessTutor.models.{Game, Outcome}
+import zn.makery.ChessTutor.models.Game
 import zn.makery.ChessTutor.view.WinController
 
 object ChessTutorApp extends JFXApp3:

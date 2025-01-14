@@ -2,11 +2,11 @@ package ChessTutor.models.chessPieces
 
 import ChessTutor.models.chessPieces.Alliance._
 
-class Bishop (_color: Alliance) extends B_ChessPieces(_color) with Diagonal:
+class Bishop (__color: Alliance) extends B_ChessPieces(__color) with Diagonal:
   override val _symbol =
-    _color match
+    __color match
       case White => "♗"
       case Black => "♝"
-      case _ => throw IllegalArgumentException(s"No such color $_color")
+      case _ => throw IllegalArgumentException(s"No such color $__color")
 
 

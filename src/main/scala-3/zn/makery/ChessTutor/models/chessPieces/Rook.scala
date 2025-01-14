@@ -2,11 +2,11 @@ package ChessTutor.models.chessPieces
 
 import ChessTutor.models.chessPieces.Alliance._
 
-class Rook (_color: Alliance) extends B_ChessPieces(_color) with Crosser:
+class Rook (__color: Alliance) extends B_ChessPieces(__color) with Crosser:
   
   override val _symbol =
-    _color match
+    __color match
       case White => "♖"
       case Black => "♜"
-      case _ => throw IllegalArgumentException(s"No such color $_color")
+      case _ => throw IllegalArgumentException(s"No such color $__color")
 

@@ -15,7 +15,7 @@ import zn.makery.ChessTutor.models.{Game, Moves}
  * Controls the view of the board. Generates the board view. Violates SRP, TODO seperate responsibilities.
  * @param game the model
  */
-class BoardView(game: Game) extends GridPane:
+class BoardView(private val game: Game) extends GridPane:
   private var selectedPiece: Option[B_ChessPieces] = None
   private val board = game.board
   updateBoard()
@@ -58,11 +58,11 @@ class BoardView(game: Game) extends GridPane:
     initialize() //Redraw based on model
 
     (0 until 8).foreach(row => (0 until 8).foreach(col =>
-        board.piece(row, col) match
+        board.pieceAt(row, col) match
           case Some(piece) =>
             //Gets the appropriate stack pane
             val cell = children.get(row * 8 + col).asInstanceOf[javafx.scene.layout.StackPane]
-            val text = new Text(piece._symbol):
+            val text = new Text(piece.symbol):
               fill = Black
               style = "-fx-font-size: 32px;"
 
@@ -89,7 +89,7 @@ class BoardView(game: Game) extends GridPane:
 
     //Test line
     println(s"Clicked on cell at ($row, $col)")
-    board.piece(row, col) match
+    board.pieceAt(row, col) match
       case Some(piece) =>
         selectedPiece = Some(piece)
 //        println(s"Cell contains piece: ${piece._symbol} ${piece.getClass}")
