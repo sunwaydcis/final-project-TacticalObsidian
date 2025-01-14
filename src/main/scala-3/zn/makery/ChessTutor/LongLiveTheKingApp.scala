@@ -12,7 +12,7 @@ import scalafx.scene.Scene
 import scalafx.stage.{Modality, Stage}
 import LongLiveTheKingApp.{getClass, stage}
 import zn.makery.ChessTutor.models.Game
-import zn.makery.ChessTutor.view.{HelpController, WinController}
+import zn.makery.ChessTutor.view.{RootLayoutController, RulesViewController, WinController}
 
 /**
  * The `LongLiveTheKingApp`(LLtK) object serves as the main application for the LLtK application.
@@ -29,6 +29,7 @@ object LongLiveTheKingApp extends JFXApp3:
     val rootResource = getClass.getResource("view/RootLayout.fxml")
     val loader = new FXMLLoader(rootResource)
     loader.load()
+    val controller = loader.getController[RootLayoutController]
     
     //Set the stage
     rootPane = Option(loader.getRoot[jfxs.layout.BorderPane])
@@ -82,8 +83,7 @@ object LongLiveTheKingApp extends JFXApp3:
     val board = new Board
     board.initialize()
     board
-    
-  def popUpDialog[Controller]()
+
   /**
    * Displays a dialog window to indicate the game over status and interacts with the controller.
    * @return a Boolean indicating whether the OK button was clicked (true) or not (false).
@@ -109,10 +109,10 @@ object LongLiveTheKingApp extends JFXApp3:
     control.okClicked
     
   def helpPane(): Boolean =
-    val loader = new FXMLLoader(getClass.getResource("view/HelpView.fxml"))
+    val loader = new FXMLLoader(getClass.getResource("view/RulesView.fxml"))
     loader.load
     val roots2 = loader.getRoot[jfxs.Parent]
-    val control = loader.getController[HelpController]
+    val control = loader.getController[RulesViewController]
     
     val dialog = new Stage():
       initModality(Modality.ApplicationModal)
