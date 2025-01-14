@@ -14,7 +14,7 @@
    <children>
       <BorderPane layoutX="130.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" styleClass="main_bkg" stylesheets="@A_ChessTutor.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" styleClass="card_bkg" BorderPane.alignment="CENTER">
+            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #27233A;" styleClass="card_bkg" BorderPane.alignment="CENTER">
               <buttons>
                   <Button mnemonicParsing="false" onAction="#doBackTrack" text="Back" />
               </buttons>
@@ -24,7 +24,7 @@
             </ButtonBar>
          </top>
          <center>
-            <AnchorPane prefHeight="360.0" prefWidth="390.0" style="-fx-background-color: beige;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="360.0" prefWidth="390.0" style="-fx-background-color: #9C8185;" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>

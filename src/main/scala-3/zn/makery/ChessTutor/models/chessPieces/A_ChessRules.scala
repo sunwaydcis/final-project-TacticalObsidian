@@ -99,7 +99,7 @@ trait MultiDirectional extends Moveable:
       var rowIterable = directionalRow + row
       var colIterable = directionalCol + col
       while rowIterable >= 0 && rowIterable < 8 && colIterable >= 0 && colIterable < 8 do
-        println(s"Possible moves at (${rowIterable}, ${colIterable})")
+//        println(s"Possible moves at ($rowIterable, $colIterable)")
         board.pieceAt(rowIterable, colIterable) match
           case Some(piece) =>
             if piece.color != this.asInstanceOf[ChessPiece].color then
@@ -122,20 +122,20 @@ trait ShortStepper extends MultiDirectional:
   override def singleStep = true
 
 trait Diagonal extends MultiDirectional:
-  override def directions = List(
+  override def directions: List[(Int, Int)] = List(
     (1, 1), (1, -1),
     (-1, 1), (-1, -1))
 
 trait Crosser extends MultiDirectional:
-  override def directions  = List(
+  override def directions: List[(Int, Int)] = List(
     (0, 1), (0, -1),
     (1, 0), (-1, 0))
 
 trait AllDirections extends MultiDirectional with Crosser with Diagonal:
-  override def directions = super[Diagonal].directions ++ super[Crosser].directions //Combines both directions
+  override def directions: List[(Int, Int)] = super[Diagonal].directions ++ super[Crosser].directions //Combines both directions
 
 trait Octet extends MultiDirectional:
-  override def directions = List(
+  override def directions: List[(Int, Int)] = List(
     (2, 1), (2, -1), (1, 2), (1, -2),
     (-1, 2), (-1, -2), (-2, 1), (-2, -1))
 

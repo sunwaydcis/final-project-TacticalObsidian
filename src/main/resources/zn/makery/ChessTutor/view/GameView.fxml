@@ -45,11 +45,6 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="whiteTakes" text="Takes">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
                               <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Label text="WHITE">
@@ -67,11 +62,6 @@
                         <VBox fx:id="blackTag" prefHeight="92.0" prefWidth="492.0" style="-fx-background-color: #222222;">
                            <children>
                               <Label fx:id="blackPlayer" text="PLayerName" textFill="WHITE">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="blackTakes" text="Takes" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

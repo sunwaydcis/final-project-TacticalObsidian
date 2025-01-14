@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zn.makery.ChessTutor.view.EntryViewContoller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #27233A;" stylesheets="@A_ChessTutor.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zn.makery.ChessTutor.view.EntryViewContoller">
    <children>
-      <Text layoutX="124.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Down With The King" textAlignment="CENTER" wrappingWidth="355.0272979736328" AnchorPane.bottomAnchor="220.20000000000005" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="127.0">
+      <Text fill="#fbaf00" layoutX="105.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Long Live The King" textAlignment="CENTER" wrappingWidth="394.22727966308594" AnchorPane.bottomAnchor="223.7138671875" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="103.79999999999995" AnchorPane.topAnchor="127.0732421875">
          <font>
-            <Font size="37.0" />
+            <Font name="AIAEverest-ExtraBold" size="37.0" />
          </font>
       </Text>
       <VBox layoutX="239.0" layoutY="210.0" prefHeight="63.0" prefWidth="126.0" spacing="10.0" AnchorPane.leftAnchor="239.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="26.0" prefWidth="130.0" text="Play" />
+            <Button mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #FBAF00;" text="Play" />
          </children>
       </VBox>
    </children>
+   <styleClass>
+      <String fx:value="main_bkg" />
+      <String fx:value="font1" />
+   </styleClass>
 </AnchorPane>

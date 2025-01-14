@@ -1,16 +1,8 @@
 .main_bkg{
-    -fx-background-color: #6C584C;
+    -fx-background-color: #27233A;
 }
 
-.card_bkg{
-    -fx-background-color: #A98467;
-}
-
-.game_menu{
-    -fx-background-color: #333D29;
-}
-
-.game_menu_opt{
-    -fx-background-color: #656D4A;
+.font1{
+    -fx-text-fill: #FBAF00;
 }
 
