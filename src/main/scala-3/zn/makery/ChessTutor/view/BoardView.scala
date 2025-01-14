@@ -26,6 +26,7 @@ import zn.makery.ChessTutor.models.{Game, Moves}
 class BoardView(private val game: Game) extends GridPane: //This approach is highly unorthodox to practicals 4-7, but tries to follow MySecondGui
   private var selectedPiece: Option[ChessPiece] = None
   private val board = game.board
+  private var moves = 0
   updateBoard()
 
   private def initialize(): Unit =
@@ -141,35 +142,17 @@ class BoardView(private val game: Game) extends GridPane: //This approach is hig
    * @note Every move made, the board is scanned to see if a win or draw condition has been met.
    *       Else, it'll create a new instance of `Move` to be stored onto the `MoveHistoryTable > GameViewController`
    */
+  //Moves the piece from the board
   private def doMove(piece: ChessPiece, newRow: Int, newCol: Int): Unit =
+    loadNewMove(piece, newRow, newCol)
+    isDraw()
+    kingDead(piece, newRow, newCol)
     board.movePiece(piece, newRow, newCol)
     updateBoard() //The board is updated each time.
 
-    //Checks if the opposing king has been taken for win condition
-    val opposingKingColor = piece.color match
-      case Alliance.White => Alliance.Black
-      case Alliance.Black => Alliance.White
-
-    // Find the position of the opposing king
-    //155 - 165 (Assistance; Githup Copilot)
-    val opposingKingPosition = board.piecePositions.find {
-      case (piece, _) => piece.isInstanceOf[King] && piece.color == opposingKingColor
-    }.map(_._2)
-
-    opposingKingPosition match
-      case Some((kingRow, kingCol)) =>
-        val end = opposingKingPosition.get
-        if end == (newRow, newCol) then
-          val winner =
-            piece.color match
-              case Alliance.White => (game.whiteName, Some(Alliance.White))
-              case Alliance.Black => (game.blackName, Some(Alliance.Black))
-          LongLiveTheKingApp.winDialog(s"${winner._1} Won!", winner._2)
-      case None => //Do nothing
-
-
+  private def loadNewMove(piece: ChessPiece, newRow: Int, newCol: Int): Unit =
     //Returns a letter for correspondent board column
-    val column  = newCol match
+    val column = newCol match
       case 0 => "A"
       case 1 => "B"
       case 2 => "C"
@@ -181,8 +164,38 @@ class BoardView(private val game: Game) extends GridPane: //This approach is hig
 
     //Returns chess correct position (Example: (0, 7) => h1
     val newPosition = String.format(s"$column$newRow")
-    game.moves +=  Moves(piece, newPosition, None) //Binds the new piece to the game.moves
 
+    val takes =
+      board.pieceAt(newRow, newCol) match
+        case Some(piece) =>
+          moves = 0
+          Some(piece)
+        case None =>
+          moves += 1
+          None
+    game.moves += Moves(piece, newPosition, takes)
 
+  private def kingDead(piece: ChessPiece, newRow: Int, newCol: Int): Unit =
+    //Checks if the opposing king has been taken for win condition
+    val opposingKingColor = piece.color match
+      case Alliance.White => Alliance.Black
+      case Alliance.Black => Alliance.White
 
+    // Find the position of the opposing king
+    val opposingKingPosition = board.piecePositions.find {
+      case (p, _) => p.isInstanceOf[King] && p.color == opposingKingColor
+    }.map(_._2)
 
+    opposingKingPosition match
+      case Some((kingRow, kingCol)) =>
+        val end = opposingKingPosition.get
+        if end == (newRow, newCol) then
+          val (winner) = piece.color match
+            case Alliance.White => (game.whiteName, Alliance.White)
+            case Alliance.Black => (game.blackName, Alliance.Black)
+          LongLiveTheKingApp.winDialog(s"${winner._1} Won!", Some(winner._2))
+      case None =>
+
+  private def isDraw(): Unit =
+    if (moves >= 5) //Normally 50 move rule, but since the game is about taking the king with as little rules as possible, add a stricter condition.
+      LongLiveTheKingApp.winDialog("Draw", None)
