@@ -26,7 +26,7 @@ import zn.makery.ChessTutor.models.{Game, Moves}
 class BoardView(private val game: Game) extends GridPane: //This approach is highly unorthodox to practicals 4-7, but tries to follow MySecondGui
   private var selectedPiece: Option[ChessPiece] = None
   private val board = game.board
-  private var moves = 0
+  private var passiveMoves = 0
   updateBoard()
 
   private def initialize(): Unit =
@@ -90,10 +90,10 @@ class BoardView(private val game: Game) extends GridPane: //This approach is hig
     )
 
   /**
-   * Highlights the possible moves of a selected piece on the game board and sets up a click event for each target cell.
+   * Highlights the possible passiveMoves of a selected piece on the game board and sets up a click event for each target cell.
    *
-   * @param moves A list of integers representing the indices of the target cells where the selected piece can move.
-   * @return Nothing is returned as the method has a Unit return type. The method modifies the UI to display the moves and attaches click handlers to the target cells.
+   * @param passiveMoves A list of integers representing the indices of the target cells where the selected piece can move.
+   * @return Nothing is returned as the method has a Unit return type. The method modifies the UI to display the passiveMoves and attaches click handlers to the target cells.
    */
   private def showMoves(moves: List[Int]): Unit =
     moves.foreach:
@@ -110,7 +110,7 @@ class BoardView(private val game: Game) extends GridPane: //This approach is hig
   /**
    * Handles the click event on a specific cell in the grid. This method determines the presence
    * of a piece at the given cell location, updates the board accordingly, and optionally displays
-   * possible moves for a selected piece.
+   * possible passiveMoves for a selected piece.
    *
    * @param row  The row index of the cell that was clicked.
    * @param col  The column index of the cell that was clicked.
@@ -168,10 +168,10 @@ class BoardView(private val game: Game) extends GridPane: //This approach is hig
     val takes =
       board.pieceAt(newRow, newCol) match
         case Some(piece) =>
-          moves = 0
+          passiveMoves = 0
           Some(piece)
         case None =>
-          moves += 1
+          passiveMoves += 1
           None
     game.moves += Moves(piece, newPosition, takes)
 
@@ -197,5 +197,5 @@ class BoardView(private val game: Game) extends GridPane: //This approach is hig
       case None =>
 
   private def isDraw(): Unit =
-    if (moves >= 5) //Normally 50 move rule, but since the game is about taking the king with as little rules as possible, add a stricter condition.
+    if (passiveMoves >= 5) //Normally 50 move rule, but since the game is about taking the king with as little rules as possible, add a stricter condition.
       LongLiveTheKingApp.winDialog("Draw", None)
