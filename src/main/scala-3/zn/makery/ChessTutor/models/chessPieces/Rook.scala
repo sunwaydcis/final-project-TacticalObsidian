@@ -2,7 +2,7 @@ package ChessTutor.models.chessPieces
 
 import ChessTutor.models.chessPieces.Alliance._
 
-class Rook (__color: Alliance) extends B_ChessPieces(__color) with Crosser:
+class Rook (__color: Alliance) extends ChessPiece(__color) with Crosser:
   
   override val _symbol =
     __color match

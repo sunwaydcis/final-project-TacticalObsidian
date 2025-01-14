@@ -3,7 +3,7 @@ package ChessTutor.models.chessPieces
 import ChessTutor.models.Board
 import ChessTutor.models.chessPieces.Alliance.*
 
-class Pawn (_color: Alliance) extends B_ChessPieces(_color) with TPawn:
+class Pawn (_color: Alliance) extends ChessPiece(_color) with TPawn:
 
   override def direction : Int =
     this._color match

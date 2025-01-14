@@ -2,7 +2,7 @@ package ChessTutor.models.chessPieces
 
 import ChessTutor.models.chessPieces.Alliance._
 
-class Bishop (__color: Alliance) extends B_ChessPieces(__color) with Diagonal:
+class Bishop (__color: Alliance) extends ChessPiece(__color) with Diagonal:
   override val _symbol =
     __color match
       case White => "♗"

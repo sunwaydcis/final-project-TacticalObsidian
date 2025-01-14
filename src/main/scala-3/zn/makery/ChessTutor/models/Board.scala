@@ -4,11 +4,18 @@ import ChessTutor.models.chessPieces.Alliance.*
 import ChessTutor.models.chessPieces.*
 import zn.makery.ChessTutor.models.casts.Coordinate
 
+/**
+ * Represents a chess board for managing the positions of chess pieces and their movement.
+ *
+ * The board is an 8x8 grid, with each cell holding an optional chess piece. It maintains 
+ * the positions of all pieces on the board and provides methods to initialize the board, 
+ * query positions, and manage piece movements.
+ */
 class Board:
-  private val _board: Array[Array[Option[B_ChessPieces]]] = Array.fill(8, 8)(None)
-  private var _piecePositions = Map[B_ChessPieces, Coordinate]()
+  private val _board: Array[Array[Option[ChessPiece]]] = Array.fill(8, 8)(None) //piece grid positioning
+  private var _piecePositions = Map[ChessPiece, Coordinate]() //piece locating
 
-  def initialize: Unit =
+  def initialize(): Unit =
     for i <- 0 until 8 do
       placePiece(new Pawn(White), 6, i)
       placePiece(new Pawn(Black), 1, i)
@@ -31,26 +38,33 @@ class Board:
     placePiece(new Knight(Black), 0, 6)
     placePiece(new Rook(Black), 0, 7)
 
-  def board = _board
-  def piecePositions = _piecePositions
-  def positionOf(piece: B_ChessPieces) = _piecePositions.get(piece).get
-  def pieceAt(row: Int, col: Int) = _board(row)(col)
+  def board: Array[Array[Option[ChessPiece]]] = 
+    _board
+  def piecePositions: Map[ChessPiece, (Int, Int)] = 
+    _piecePositions
+  def positionOf(piece: ChessPiece): Coordinate = 
+    _piecePositions.get(piece).get
+  def pieceAt(row: Int, col: Int): Option[ChessPiece] = 
+    _board(row)(col)
 
-  def movePiece(piece: B_ChessPieces, newRow: Int, newCol: Int) =
+  /**
+   * Moves a chess piece to a new position on the board and updates the piece's move history.
+   *
+   * @param piece  The chess piece to be moved.
+   * @param newRow The row index of the target position on the board.
+   * @param newCol The column index of the target position on the board.
+   */
+  def movePiece(piece: ChessPiece, newRow: Int, newCol: Int) =
     val position: Option[(Int, Int)] = _piecePositions.get(piece)
     removePiece(piece, position.get(0), position.get(1))
     placePiece(piece, newRow, newCol)
-    piece._moveStack.push((newRow, newCol))
-
-
-
-
-
-  private def placePiece(piece: B_ChessPieces, row: Int, col: Int) =
+    piece.makeMove((newRow, newCol))
+  
+  private def placePiece(piece: ChessPiece, row: Int, col: Int) =
     _board(row)(col) = Some(piece)
     _piecePositions += (piece -> (row, col))
 
-  private def removePiece(piece: B_ChessPieces, row: Int, col: Int) =
+  private def removePiece(piece: ChessPiece, row: Int, col: Int) =
     _board(row)(col) = None
     _piecePositions = _piecePositions - piece
 

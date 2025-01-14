@@ -2,7 +2,7 @@ package ChessTutor.models.chessPieces
 
 import ChessTutor.models.chessPieces.Alliance._
 
-class King (__color: Alliance) extends B_ChessPieces(__color) with AllDirections with ShortStepper:
+class King (__color: Alliance) extends ChessPiece(__color) with AllDirections with ShortStepper:
   
   override val _symbol =
     __color match

@@ -6,11 +6,10 @@ import scalafx.Includes.*
 import javafx.scene.control.Label
 import javafx.scene.shape.Rectangle
 import scalafx.stage.Stage
-import zn.makery.ChessTutor.ChessTutorApp
+import zn.makery.ChessTutor.LongLiveTheKingApp
 
 class WinController:
   @FXML private var winBox: Label = null
-  @FXML private var winBkg: Rectangle = null
 
   var dialogStage: Stage = null
   var outcome : String = null
@@ -19,9 +18,9 @@ class WinController:
 //  def outcome = __outcome
 
   def handleOk(action: ActionEvent): Unit =
-    ChessTutorApp.game=null
-    ChessTutorApp.outcome=null
-    ChessTutorApp.gameSelectionPane()
+    LongLiveTheKingApp.game=null
+    LongLiveTheKingApp.outcome=null
+    LongLiveTheKingApp.gameSelectionPane()
     dialogStage.close()
 
 
