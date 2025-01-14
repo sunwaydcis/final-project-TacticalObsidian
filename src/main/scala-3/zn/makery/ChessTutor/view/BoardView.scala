@@ -160,8 +160,11 @@ class BoardView(private val game: Game) extends GridPane: //This approach is hig
       case Some((kingRow, kingCol)) =>
         val end = opposingKingPosition.get
         if end == (newRow, newCol) then
-          LongLiveTheKingApp.outcome = s"${piece.color} Won!" //Whoever made the last move won
-          LongLiveTheKingApp.winDialog()
+          val winner =
+            piece.color match
+              case Alliance.White => (game.whiteName, Some(Alliance.White))
+              case Alliance.Black => (game.blackName, Some(Alliance.Black))
+          LongLiveTheKingApp.winDialog(s"${winner._1} Won!", winner._2)
       case None => //Do nothing
 
 

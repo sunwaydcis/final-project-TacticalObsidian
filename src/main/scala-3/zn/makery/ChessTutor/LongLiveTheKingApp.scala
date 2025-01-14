@@ -1,6 +1,7 @@
 package zn.makery.ChessTutor
 
 import ChessTutor.models.Board
+import ChessTutor.models.chessPieces.Alliance
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import javafx.scene.layout.AnchorPane
@@ -85,7 +86,8 @@ object LongLiveTheKingApp extends JFXApp3:
    * Displays a dialog window to indicate the game over status and interacts with the controller.
    * @return a Boolean indicating whether the OK button was clicked (true) or not (false).
    */
-  def winDialog(): Boolean =
+  def winDialog(outcomeS: String, color: Option[Alliance]): Boolean =
+    outcome = outcomeS
     val loader = new FXMLLoader(getClass.getResource("view/WinView.fxml"))
     loader.load()
     val roots2 = loader.getRoot[jfxs.Parent]
@@ -96,12 +98,13 @@ object LongLiveTheKingApp extends JFXApp3:
       initOwner(stage)
       scene = new Scene:
         root = roots2
-    
+
     control.dialogStage = dialog
+    control.color = color
     control.outcome = outcome
+    control.initialize
     dialog.showAndWait()
     control.okClicked
-
   /**
    * @return the current instance of the Game.
    */

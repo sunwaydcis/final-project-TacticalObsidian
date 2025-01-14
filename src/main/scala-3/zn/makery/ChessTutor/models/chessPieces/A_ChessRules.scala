@@ -96,25 +96,25 @@ trait MultiDirectional extends Moveable:
   override def moves(board: Board, row: Int, col: Int): List[Int] =
     var legalMoves: List[Int] = List()
     for (directionalRow, directionalCol) <- directions do
-      var rowIterable = row + directionalRow
-      var colIterable = col + directionalCol
+      var rowIterable = directionalRow + row
+      var colIterable = directionalCol + col
       while rowIterable >= 0 && rowIterable < 8 && colIterable >= 0 && colIterable < 8 do
-        println(s"Possible moves at ($rowIterable, $colIterable)")
+        println(s"Possible moves at (${rowIterable}, ${colIterable})")
         board.pieceAt(rowIterable, colIterable) match
           case Some(piece) =>
             if piece.color != this.asInstanceOf[ChessPiece].color then
               legalMoves = legalMoves :+ (rowIterable * 8 + colIterable)
             rowIterable = -1
             colIterable = -1
-          case None => legalMoves = legalMoves :+ (rowIterable * 8 + colIterable)
-          
-        if singleStep then //stop the loop
+          case None =>
+            legalMoves = legalMoves :+ (rowIterable * 8 + colIterable)
+        if singleStep then
           rowIterable = -1
           colIterable = -1
 
         if rowIterable != -1 && colIterable != -1 then
-          rowIterable += row
-          colIterable += col
+          rowIterable += directionalRow
+          colIterable += directionalCol
     legalMoves
 
 //These are directions and helper variables for MultiDirectional
@@ -122,20 +122,20 @@ trait ShortStepper extends MultiDirectional:
   override def singleStep = true
 
 trait Diagonal extends MultiDirectional:
-  override def directions: List[Coordinate] = List(
+  override def directions = List(
     (1, 1), (1, -1),
     (-1, 1), (-1, -1))
 
 trait Crosser extends MultiDirectional:
-  override def directions: List[Coordinate] = List(
+  override def directions  = List(
     (0, 1), (0, -1),
     (1, 0), (-1, 0))
 
 trait AllDirections extends MultiDirectional with Crosser with Diagonal:
-  override def directions: List[Coordinate] = super[Diagonal].directions ++ super[Crosser].directions //Combines both directions
+  override def directions = super[Diagonal].directions ++ super[Crosser].directions //Combines both directions
 
 trait Octet extends MultiDirectional:
-  override def directions: List[Coordinate] = List(
+  override def directions = List(
     (2, 1), (2, -1), (1, 2), (1, -2),
     (-1, 2), (-1, -2), (-2, 1), (-2, -1))
 

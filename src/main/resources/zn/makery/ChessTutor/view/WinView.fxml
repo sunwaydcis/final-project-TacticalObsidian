@@ -18,7 +18,7 @@
                   <StackPane prefHeight="114.0" prefWidth="386.0">
                      <children>
                         <Rectangle fx:id="winBkg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="113.0" stroke="BLACK" strokeType="INSIDE" width="386.0" />
-                        <Label text="PLACEHOLDER WON">
+                        <Label fx:id="winTxt" text="PLACEHOLDER WON">
                            <font>
                               <Font size="24.0" />
                            </font>
